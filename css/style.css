@@ -1,0 +1,51 @@
+#bodyForm{
+	background-color: rgb(243,243,243);
+	top:10vh;
+	left: 12vw;
+	width: 75vw;
+	text-align: center;
+
+	/*box-shadow: 0.1em 0.1em 0.5em #8f8f8f;*/
+
+	padding: 1em;
+}
+
+h1{
+	color: rgb(51,51,51);
+	font-size: 2em;
+	font-weight: bold;
+}
+
+header{
+	background-color: rgb(40,40,40);
+	width: 100vw;
+	left: 0;
+	height: 6em;
+}
+
+label{
+	color: rgb(85,85,85);
+}
+
+i.fa.iconForm{
+	font-size: 5em;
+	margin: 0.3em 0em 0.1em 0em;
+	color: rgb(85,85,85);
+}
+
+.formSpace{
+	margin-top:3em; 
+	text-align: left;
+}
+
+input{
+	/*border-radius: 1em;*/
+	min-height: 3em;
+	background-color: white;
+	border-color: rgb(187,193,197);
+	color: rgb(187,193,197);
+	border-width: 0.12em;
+	border-style: solid;
+	width: 100%;
+
+}
