@@ -12,7 +12,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -51,18 +51,21 @@
             <h1>
               Datos Personales
               <br>
-              <i class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
+              <i class="fa fa-address-card-o iconForm" id="iconForm1" aria-hidden="true"></i>
+              <i class="fa fa-address-card-o iconForm" id="iconForm2" aria-hidden="true"></i>
+              <i class="fa fa-calendar iconForm" id="iconForm3" aria-hidden="true"></i>
+              <i class="fa fa-users iconForm" id="iconForm4" aria-hidden="true"></i>
             </h1>
           </div>
 
           <!-- FELCHA ATRAS -->
-          <div class="col-md-1" style="background-color: red">
-          <
+          <div class="col-md-1 arrowCol">
+                <i class="fa fa-arrow-circle-left unable arrowForm left" aria-hidden="true" onclick="prevForm()"></i>
           </div>
 
           <!-- FLECHA ADELANTE -->
-          <div class="col-md-1 col-md-push-6" style="background-color: blue">
-          >
+          <div class="col-md-1 col-md-push-6 arrowCol" >
+                <i class="fa fa-arrow-circle-right unable arrowForm right" aria-hidden="true" onclick="nextForm()"></i>
           </div>          
 
           <!-- FORMULARIOS -->
@@ -70,16 +73,98 @@
             <form>
 
             <!-- VISTA 1 -->
-              <label>Civil State</label><br>
-              <input type="text" name="">
+              <span id="viewForm1" style="display: inline;">   
+                <label>Civil State</label><br>
+                <select id="civilState1" onchange="enableArrow()">
+                    <option selected="" disabled="" value="0">Civil State</option>
+                    <option value="1">Civil State 1</option>
+                    <option value="2">Civil State 2</option>
+                    <option value="3">Civil State 3</option>
+                </select>
 
-              <label>Nationality</label><br>
-              <input type="text" name="">
+                <label>Nationality</label><br>
+                <select id="Nationality1" onchange="enableArrow()">
+                    <option selected="" disabled="" value="0">Nationality</option>
+                    <option value="1">Nationality1</option>
+                    <option value="2">Nationality2</option>
+                    <option value="3">Nationality3</option>
+                </select>
 
-              <label>Education Level</label><br>
-              <input type="text" name="">
-            
+                <label>Education Level</label><br>
+                <select id="EducationLevel1" onchange="enableArrow()">
+                    <option selected="" disabled="" value="0">EducationLevel</option>
+                    <option value="1">EducationLevel1</option>
+                    <option value="2">EducationLevel2</option>
+                    <option value="3">EducationLevel3</option>
+                </select>
+              </span>
+  
+            <!-- VISTA 2 -->
+              <span id="viewForm2" style="display: inline;">   
+                <label>Country</label><br>
+                <select id="Country" onchange="enableArrow()">
+                    <option selected="" disabled="" value="0">Country</option>
+                    <option value="1">Country1</option>
+                    <option value="2">Country2</option>
+                    <option value="3">Country3</option>
+                </select>
 
+                <label>State</label><br>
+                <select id="State" onchange="enableArrow()">
+                    <option selected="" disabled="" value="0">State</option>
+                    <option value="1">State1</option>
+                    <option value="2">State2</option>
+                    <option value="3">State3</option>
+                </select>
+
+                <label>City</label><br>
+                <input type="text" name="" id="city"  placeholder="City" value="">
+              </span>            
+  
+            <!-- VISTA 3 -->
+              <span id="viewForm3" style="display: inline;">   
+                <label>In Date</label><br>
+                <input type="date" name="">
+
+                <label>Out Date</label><br>
+                <input type="date" name="">
+              </span>
+
+            <!-- VISTA 4 -->
+              <span id="viewForm4" style="display: inline;"> 
+                <div class="row">
+                    <div class="col-md-6">
+                        
+                        <label>In Date</label><br>
+                        <input type="date" name="">
+
+                        <label>In Date</label><br>
+                        <input type="date" name="">
+                        
+                        <label>In Date</label><br>
+                        <input type="date" name="">
+                        
+                        <label>In Date</label><br>
+                        <input type="date" name="">
+
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label>In Date</label><br>
+                        <input type="date" name="">
+
+                        <label>In Date</label><br>
+                        <input type="date" name="">
+                        
+                        <label>In Date</label><br>
+                        <input type="date" name="">
+                        
+                        <label>In Date</label><br>
+                        <input type="date" name="">
+                    </div>                    
+                </div>  
+
+              </span>               
             </form>
           
           </div>
@@ -95,3 +180,78 @@
     <script src="css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
   </body>
 </html>
+
+<script type="text/javascript">
+
+$("#viewForm1").show();
+
+$("#iconForm2").hide();
+$("#viewForm2").hide();
+
+$("#iconForm3").hide();
+$("#viewForm3").hide();
+
+
+$("#iconForm4").hide();
+$("#viewForm4").hide();
+
+var count = 1;
+
+function enableArrow(){
+    if (document.getElementById("civilState1").value != "0" && 
+        document.getElementById("Nationality1").value != "0" && 
+        document.getElementById("EducationLevel1").value != "0" ){
+        $(".arrowForm.right").removeClass("unable");
+    }
+}
+
+function nextForm(){
+    if(!$(".arrowForm.right").hasClass("unable")){
+        
+        // CONTADOR DE FRAGMENTO FORM
+        var iconFormN_1 = "#iconForm"+count;
+        var viewFormN_1 = "#viewForm"+count;
+        count+=1;
+        var iconFormN = "#iconForm"+count;
+        var viewFormN = "#viewForm"+count;
+
+        $(viewFormN_1).hide(100);
+        $(viewFormN).show();
+
+        $(iconFormN_1).hide();
+        $(iconFormN).show();
+
+        if($("#viewForm2").is(":visible")){
+            $(".arrowForm.left").removeClass("unable");
+        }
+    }
+}
+
+function prevForm(){
+if(!$(".arrowForm.left").hasClass("unable")){
+        
+        // CONTADOR DE FRAGMENTO FORM
+        var viewFormN_1 = "#viewForm"+count;
+        var iconFormN_1 = "#iconForm"+count;
+        count-=1;
+        var viewFormN = "#viewForm"+count;
+        var iconFormN = "#iconForm"+count;
+
+        $(viewFormN_1).hide();
+        $(viewFormN).show(100);
+
+        $(iconFormN_1).hide();
+        $(iconFormN).show();
+
+        if($("#viewForm2").is(":visible")){
+            $(".arrowForm.left").removeClass("unable");
+        }
+
+        if($("#viewForm1").is(":visible")){
+            $(".arrowForm.left").addClass("unable");
+        }        
+    }
+}
+
+
+</script>
