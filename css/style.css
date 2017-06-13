@@ -1,31 +1,42 @@
-#bodyForm{
-	background-color: rgb(243,243,243);
-	top:10vh;
-	left: 12vw;
-	width: 75vw;
-	text-align: center;
+/****************************/
+/*                          */
+/*          BODDY           */
+/*                          */
+/****************************/
+	#bodyForm{
+		background-color: rgb(243,243,243);
+		top:10vh;
+		left: 12vw;
+		width: 75vw;
+		text-align: center;
 
-	box-shadow: 0.1em 0.1em 0.5em #bfbfbf;
+		box-shadow: 0.1em 0.1em 0.5em #bfbfbf;
 
-	padding: 1em;
-}
+		padding: 1em;
+	}
 
-h1{
-	color: rgb(51,51,51);
-	font-size: 2em;
-	font-weight: bold;
-}
 
-header{
-	background-color: rgb(40,40,40);
-	width: 100vw;
-	left: 0;
-	height: 6em;
-}
+/****************************/
+/*                          */
+/*   LOOCK&FEEL WHYNDHAM    */
+/*                          */
+/****************************/
+	h1{
+		color: rgb(51,51,51);
+		font-size: 2em;
+		font-weight: bold;
+	}
 
-label{
-	color: rgb(85,85,85);
-}
+	header{
+		background-color: rgb(40,40,40);
+		width: 100vw;
+		left: 0;
+		height: 6em;
+	}
+
+	label{
+		color: rgb(85,85,85);
+	}
 
 i.fa.iconForm, i.fa.arrowForm{
 	font-size: 5em;
@@ -71,37 +82,53 @@ input, select, textarea{
     color: rgb(85,85,85);
 }
 
-input.radioForm{
-	margin-top:-20px;
-}
 
-td.radioForm{
-	width: 4em;
-	text-align: right;
+/****************************/
+/*                          */
+/*        RADIO FORM        */
+/*                          */
+/****************************/
+	input.radioForm{
+		margin-top:-20px;
+	}
 
-}
+	td.radioForm{
+		width: 4em;
+		text-align: right;
 
-td.radioFormLabel{
-	text-align: left;
-	padding-left:1em;
-	
-}
+	}
 
-table.tableForm.rooms{
-	background-color: red;
-}
+	td.radioFormLabel{
+		text-align: left;
+		padding-left:1em;
+		
+	}
 
-table.tableForm.rooms > tbody> tr > td{
-	min-height: 4em;
-}
+/****************************/
+/*                          */
+/*       BUTTON FORM        */
+/*                          */
+/****************************/
+	.buttonForm{
+		border-style: solid;
+		border-color: rgb(184,184,184);
+		color: rgb(184,184,184);
+		border-width: 0.2em;
+		border-bottom-width: 0.5em;
+		background-color: transparent;
+		padding: 1em;
 
-table.tableForm.rooms > tbody> tr > td{
-	border-color: black;
-	border-style: solid;
-	color: yellow;
-	margin: 2em;
-	padding: 1em;
-	width: 40%;
-	text-align: center;
-	border-bottom-width: 0.5em;
-}
+		-webkit-user-select:none;
+		-moz-user-select:none;
+		-ms-user-select:none;
+		user-select:none;
+
+		min-width: 40%;
+		max-width: 40%;
+		
+	}
+
+	.buttonForm:hover,.buttonForm.active{
+		border-color: rgb(85,85,85);
+		color: rgb(85,85,85);
+	}

@@ -78,7 +78,7 @@
             <form>
 
             <!-- VISTA 1 -->
-              <span id="viewForm1">   
+              <span id="viewForm5">   
                 <label>Civil State</label><br>
                 <select id="civilState1" onchange="enableArrow()">
                     <option selected="" disabled="" value="0">Civil State</option>
@@ -185,23 +185,10 @@
               </span>
 
             <!-- VISTA 5 -->
-              <span id="viewForm5"> 
+              <span id="viewForm1"> 
                 <div class="row">
-                  <table class="tableForm rooms"> 
-                  <tbody>
-                    
-                    <tr>
-                      <td>Superior King</td>
-                      <td>Superior Doble</td>
-                    </tr>
-                    <tr>
-                      <td>Deluxe Suite</td>
-                      <td>Corner Suite</td>
-                    </tr>
-                  </tbody>
-                  </table>
-                    
-                                      
+                <button type="button" class="buttonForm" data-toggle="modal" data-target="#myModal">Superior King</button>
+                <button type="button" class="buttonForm" data-toggle="modal" data-target="#myModal">Superior Double</button>
                 </div>  
               </span>               
             </form>
@@ -212,36 +199,51 @@
       </div>
     </div>
 
+<!-- Modal Tipo Habitacion-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-    <style>
-      #divM{
-        background: grey;
-        color: #FFF;
-        padding: 10px;
-      }
-    </style>
 
     <script type="text/javascript">
-      $(function(){
-        $("#divP").click(function(){ 
-            $("#divM").slideToggle();
-          });
-      });
 
+      // Cantidad slides del form
       var cant = 6;
 
+      // Ocultando todos los slide que no son el 
+      // primero
       for(var i=2 ; i < cant; i++){
           $("#iconForm"+i).hide();
           $("#viewForm"+i).hide();
           $("#labelForm"+i).hide();
       }
 
+      // Contador de slide en el que estoy parado
       var count = 1;
 
+      // funcion que hjabilita el boton de seguir 
+      // cuando las opciones estan llenas
       function enableArrow(){
           if (document.getElementById("civilState1").value != "0" && 
               document.getElementById("Nationality1").value != "0" && 
@@ -253,6 +255,7 @@
           }
       }
 
+      // funcion flecha siguiente
       function nextForm(){
           if(!$(".arrowForm.right").hasClass("unable")){
               
@@ -290,6 +293,7 @@
           }
       }
 
+      // funcion flecha anterior
       function prevForm(){
           if(!$(".arrowForm.left").hasClass("unable")){
               
@@ -329,6 +333,10 @@
           
               enableArrow();
           }
+      }
+
+      function openModal(){
+        console.log("pipi");
       }
     </script>
   </body>
