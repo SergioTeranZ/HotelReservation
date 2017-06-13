@@ -51,7 +51,7 @@ input,select{
 
 option:disabled{
 	color: rgb(184,184,184);
-	
+
 }
 
 i.fa.arrowForm.unable{
@@ -69,4 +69,39 @@ textarea:focus, input:focus, input:focus {
 
 input, select, textarea{
     color: rgb(85,85,85);
+}
+
+input.radioForm{
+	margin-top:-20px;
+}
+
+td.radioForm{
+	width: 4em;
+	text-align: right;
+
+}
+
+td.radioFormLabel{
+	text-align: left;
+	padding-left:1em;
+	
+}
+
+table.tableForm.rooms{
+	background-color: red;
+}
+
+table.tableForm.rooms > tbody> tr > td{
+	min-height: 4em;
+}
+
+table.tableForm.rooms > tbody> tr > td{
+	border-color: black;
+	border-style: solid;
+	color: yellow;
+	margin: 2em;
+	padding: 1em;
+	width: 40%;
+	text-align: center;
+	border-bottom-width: 0.5em;
 }
