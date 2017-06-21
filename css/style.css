@@ -156,7 +156,7 @@
 			border-radius: 0px;
 		}	
 
-		ul.nav.nav-bar-nav{
+		div#bs-example-navbar-collapse-1.navbar-toggle.collapsed ul.nav.nav-bar-nav{
 			position: relative;
 			left: 10em;
 		}
