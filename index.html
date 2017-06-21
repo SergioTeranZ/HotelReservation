@@ -11,212 +11,417 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Style -->
     <link href="css/style.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <!-- FontAwesome -->
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+  <!-- DATEPICKER -->
+  <link rel="stylesheet" type="text/css" href="css/dhtmlxCalendar_v51_std/codebase/fonts/font_roboto/roboto.css"/>
+  <link rel="stylesheet" type="text/css" href="css/dhtmlxCalendar_v51_std/codebase/dhtmlxcalendar.css"/>
+  <script src="css/dhtmlxCalendar_v51_std/codebase/dhtmlxcalendar.js"></script>
+
   </head>
-  <body>
-    <header>
-      s
-    </header>
+  <body onload="doOnLoad();">
+
+    <!--***********************************-->
+    <!--                                   -->
+    <!--              NAVBAR               -->
+    <!--                                   -->
+    <!--***********************************-->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+
+            <div class="logoContainer">
+              <img alt="Brand" class="brandLogo" src="https://www.wyndhamhotels.com/content/dam/images/global/logos/Portfolio_Logo_White.svg">
+            </div>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              
+              <li><a href="#">HOME<span class="sr-only">(current)</span></a></li>
+              <li><a href="#">SAVINGS CENTRAL</a></li>
+              <li><a href="#">GROUPS</a></li>
+              <li><a href="#">FIND RESERVATION</a></li>
+
+            </ul>
+            
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+
+
     <div class="container-fluid">
-
-      <div class="row">
-        <div class="col-md-12" style="text-align: center;">
-        <br>
-        <br>
-        <br>
-        <img src="img/hotel-icon.png" id="hotel-icon">
-        <br>
-        RESERVATION
-        <br>
+      <!--***********************************-->
+      <!--                                   -->
+      <!--               TEXT                -->
+      <!--                                   -->
+      <!--***********************************-->
+        <div class="row">
+          <div class="col-md-12" style="text-align: center;">
+          <br>
+          <br>
+          <br>
+          <img src="img/hotel-icon.png" id="hotel-icon">
+          <br>
+          RESERVATION
+          <br>
+          </div>
         </div>
-      </div>
 
-      <div class="row">
+      <!--*****************************************************-->
+      <!--                                                     -->
+      <!--            CUERPO SISTEMA DE RESERVACION            -->
+      <!--                                                     -->
+      <!--*****************************************************-->
+        <div class="row">
+          <div class="col-md-12" style="text-align: center;top: 9vh;">
+            Completa el formulario para realizar tu reservacion
+          </div>
+          <!--***********************************-->
+          <!--                                   -->
+          <!--         CUERPO FORMULARIO         -->
+          <!--                                   -->
+          <!--***********************************-->
+            <div class="col-md-6" id="bodyForm">
+              <div class="col-md-4">
+                <h1>
+                <!--*************************-->
+                <!--                         -->
+                <!--   LABELS FORMULARIOS    -->
+                <!--                         -->
+                <!--*************************-->
+                    <span id="labelForm1">Personal Data</span>
+                    <span id="labelForm2">Personal Data</span>
+                    <span id="labelForm3">Personal Data</span>
+                    <span id="labelForm4">Personal Data</span>
+                    <span id="labelForm5">Reservation Data</span>
+                    <span id="labelForm6">Companion</span>
+                    <span id="labelForm7">Rooms</span>
+                    <br>
+                  
+                <!--*************************-->
+                <!--                         -->
+                <!--   ICONOS FORMULARIOS    -->
+                <!--                         -->
+                <!--*************************-->
+                    <i id="iconForm1" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
+                    <i id="iconForm2" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
+                    <i id="iconForm3" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
+                    <i id="iconForm4" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
+                    <i id="iconForm5" class="fa fa-calendar       iconForm" aria-hidden="true"></i>
+                    <i id="iconForm6" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
+                    <i id="iconForm7" class="fa fa-bed            iconForm" aria-hidden="true"></i>
+                </h1>
+              </div>
+
+              <!--*************************-->
+              <!--                         -->
+              <!--      FLECHA ATRAS       -->
+              <!--                         -->
+              <!--*************************-->
+                <div class="col-md-1 arrowCol">
+                      <i class="fa fa-angle-left unable arrowForm left" aria-hidden="true" onclick="prevForm()"></i>
+                </div>
+
+              <!--*************************-->
+              <!--                         -->
+              <!--     FLECHA ADELANTE     -->
+              <!--                         -->
+              <!--*************************-->
+                <div class="col-md-1 col-md-push-6 arrowCol" >
+                      <i class="fa fa-angle-right unable arrowForm right" aria-hidden="true" onclick="nextForm()"></i>
+                </div>          
+
+              <!--*************************-->
+              <!--                         -->
+              <!--       FORMULARIOS       -->
+              <!--                         -->
+              <!--*************************-->
+                <div class="col-md-6 col-md-pull-1 formSpace">
+                  <form>
+
+                  <!--*********************-->
+                  <!--                     -->
+                  <!-- VISTA 1:            -->
+                  <!-- email,name,lastname -->
+                  <!-- code                -->
+                  <!--                     -->
+                  <!--*********************-->
+                    <span id="viewForm1">   
+                      <label>Email</label><br>
+                      <input type="email" name="" id="emailU"  placeholder="example@mail.com" value="" onchange="enableArrow()"/>    
+
+                      <label>Name</label><br>
+                      <input type="text" name="" id="nameU"  placeholder="Name" value="" onchange="enableArrow()"/>
+
+                      <label>Lastname</label><br>
+                      <input type="text" name="" id="lastnameU"  placeholder="Lastname" value="" onchange="enableArrow()"/>
+
+                      <label>Code</label><br>
+                      <input type="text" name="" id="code"  placeholder="Code" value="" onchange="enableArrow()"/> 
+                     
+                    </span>
+
+                  <!--*********************-->
+                  <!--                     -->
+                  <!--VISTA 2:             -->
+                  <!--id,phone,birth,gender-->
+                  <!--                     -->
+                  <!--*********************-->
+                    <span id="viewForm2">   
+                      <label>Id</label><br>
+                      <input type="text" name="" id="idU"  placeholder="Id" value="" onchange="enableArrow()"/>    
+
+                      <label>Phone</label><br>
+                      <input type="text" name="" id="phoneU"  placeholder="phone" value="" onchange="enableArrow()"/>
+
+                      <label>Date of Birth</label><br>
+                      <input type="text" id="cal_DateBirth">
+                              
+                      <label>Gender</label><br>
+                          
+                      <table>
+                          <tr>
+                              <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="gender" value="1"></label></td>
+                              <td class="radioFormLabel"> M</td>
+
+                              <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="gender" value="2"></label></td>
+                              <td class="radioFormLabel"> F</td>
+
+
+                              <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="gender" value="3"></label></td>
+                              <td class="radioFormLabel"> Other</td>
+                          </tr>                            
+                      </table>
+                     
+                    </span>                    
+
+                  <!--*********************-->
+                  <!--                     -->
+                  <!-- VISTA 3:            -->
+                  <!-- civil state,        -->
+                  <!-- nationality,        -->
+                  <!-- education level     -->
+                  <!--                     -->
+                  <!--*********************-->
+                    <span id="viewForm3">   
+                      <label>Civil State</label><br>
+                      <select id="civilState1" onchange="enableArrow()">
+                          <option selected="" disabled="" value="0">Select Civil State</option>
+                          <option value="1">Civil State 1</option>
+                          <option value="2">Civil State 2</option>
+                          <option value="3">Civil State 3</option>
+                      </select>
+
+                      <label>Nationality</label><br>
+                      <select id="Nationality1" onchange="enableArrow()">
+                          <option selected="" disabled="" value="0">Nationality</option>
+                          <option value="1">Nationality1</option>
+                          <option value="2">Nationality2</option>
+                          <option value="3">Nationality3</option>
+                      </select>
+
+                      <label>Education Level</label><br>
+                      <select id="EducationLevel1" onchange="enableArrow()">
+                          <option selected="" disabled="" value="0">EducationLevel</option>
+                          <option value="1">EducationLevel1</option>
+                          <option value="2">EducationLevel2</option>
+                          <option value="3">EducationLevel3</option>
+                      </select>
+                    </span>
         
-        <div class="col-md-12" style="text-align: center;top: 9vh;">
-          Completa el formulario para realizar tu reservacion
-        </div>
+                  <!--*********************-->
+                  <!--                     -->
+                  <!-- VISTA 4:            -->
+                  <!-- country,state,city  -->
+                  <!--                     -->
+                  <!--*********************-->
+                    <span id="viewForm4">   
+                      <label>Country</label><br>
+                      <select id="Country" onchange="enableArrow()">
+                          <option selected="" disabled="" value="0">Country</option>
+                          <option value="1">Country1</option>
+                          <option value="2">Country2</option>
+                          <option value="3">Country3</option>
+                      </select>
 
-        <div class="col-md-6" id="bodyForm">
-          <div class="col-md-4">
-            <h1>
-              <span id="labelForm1">Datos Personales</span>
-              <span id="labelForm2">Datos Personales</span>
-              <span id="labelForm3">Datos Reservacion</span>
-              <span id="labelForm4">Acompañantes</span>
-              <span id="labelForm5">Habitaciones</span>
-              <br>
-              <i id="iconForm1" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
-              <i id="iconForm2" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
-              <i id="iconForm3" class="fa fa-calendar       iconForm" aria-hidden="true"></i>
-              <i id="iconForm4" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
-              <i id="iconForm5" class="fa fa-bed          iconForm" aria-hidden="true"></i>
-            </h1>
-          </div>
+                      <label>State</label><br>
+                      <select id="State" onchange="enableArrow()">
+                          <option selected="" disabled="" value="0">State</option>
+                          <option value="1">State1</option>
+                          <option value="2">State2</option>
+                          <option value="3">State3</option>
+                      </select>
 
-          <!-- FELCHA ATRAS -->
-          <div class="col-md-1 arrowCol">
-                <i class="fa fa-arrow-circle-left unable arrowForm left" aria-hidden="true" onclick="prevForm()"></i>
-          </div>
+                      <label>City</label><br>
+                      <input type="text" name="" id="city"  placeholder="City" value=""/>
+                    </span>            
+                  
+                  <!--*********************-->
+                  <!--                     -->
+                  <!-- VISTA 5:            -->
+                  <!-- date in/out         -->
+                  <!--                     -->
+                  <!--*********************-->
+                    <span id="viewForm5">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label>In Date</label><br>
+                          <input type="text" id="cal_DateIn">
+                          
+                        </div>
+                        <div class="col-md-6">
+                          <label>Out Date</label><br>
+                          <input type="text" id="cal_DateOut">
+                          
+                        </div>
+                      </div> 
+                    </span>
 
-          <!-- FLECHA ADELANTE -->
-          <div class="col-md-1 col-md-push-6 arrowCol" >
-                <i class="fa fa-arrow-circle-right unable arrowForm right" aria-hidden="true" onclick="nextForm()"></i>
-          </div>          
+                  <!--*********************-->
+                  <!--                     -->
+                  <!-- VISTA 6:            -->
+                  <!-- nameC,phoneC,emailC -->
+                  <!-- BirthC,lastnameC    -->
+                  <!-- idC,ageC,genderC    -->
+                  <!--                     -->
+                  <!--*********************-->
+                    <span id="viewForm6"> 
+                      <div class="row">
+                          <div class="col-md-6">
+                              
+                              <label>Name</label><br>
+                              <input type="text" name=""/>
 
-          <!-- FORMULARIOS -->
-          <div class="col-md-6 col-md-pull-1 formSpace">
-            <form>
+                              <label>Phone</label><br>
+                              <input type="text" name=""/>
+                              
+                              <label>Email</label><br>
+                              <input type="text" name=""/>
+                              
+                              <label>Date of Birth</label><br>
+                              <input type="text" id="cal_DateBirthC">
 
-            <!-- VISTA 1 -->
-              <span id="viewForm5">   
-                <label>Civil State</label><br>
-                <select id="civilState1" onchange="enableArrow()">
-                    <option selected="" disabled="" value="0">Civil State</option>
-                    <option value="1">Civil State 1</option>
-                    <option value="2">Civil State 2</option>
-                    <option value="3">Civil State 3</option>
-                </select>
+                          </div>
+                          
+                          <div class="col-md-6">
+                              <label>Lastname</label><br>
+                              <input type="text" name=""/>
 
-                <label>Nationality</label><br>
-                <select id="Nationality1" onchange="enableArrow()">
-                    <option selected="" disabled="" value="0">Nationality</option>
-                    <option value="1">Nationality1</option>
-                    <option value="2">Nationality2</option>
-                    <option value="3">Nationality3</option>
-                </select>
+                              <label>Id</label><br>
+                              <input type="text" name=""/>
+                              
+                              <label>Age</label><br>
+                              <input type="number" name=""/>
+                              
+                              <label>Gender</label><br>
+                                  
+                              <table>
+                                  <tr>
+                                      <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="genderC" value="1"></label></td>
+                                      <td class="radioFormLabel"> M</td>
 
-                <label>Education Level</label><br>
-                <select id="EducationLevel1" onchange="enableArrow()">
-                    <option selected="" disabled="" value="0">EducationLevel</option>
-                    <option value="1">EducationLevel1</option>
-                    <option value="2">EducationLevel2</option>
-                    <option value="3">EducationLevel3</option>
-                </select>
-              </span>
-  
-            <!-- VISTA 2 -->
-              <span id="viewForm2">   
-                <label>Country</label><br>
-                <select id="Country" onchange="enableArrow()">
-                    <option selected="" disabled="" value="0">Country</option>
-                    <option value="1">Country1</option>
-                    <option value="2">Country2</option>
-                    <option value="3">Country3</option>
-                </select>
-
-                <label>State</label><br>
-                <select id="State" onchange="enableArrow()">
-                    <option selected="" disabled="" value="0">State</option>
-                    <option value="1">State1</option>
-                    <option value="2">State2</option>
-                    <option value="3">State3</option>
-                </select>
-
-                <label>City</label><br>
-                <input type="text" name="" id="city"  placeholder="City" value=""/>
-              </span>            
-  
-            <!-- VISTA 3 -->
-              <span id="viewForm3">   
-                <label>In Date</label><br>
-                <input type="date" name=""/>
-
-                <label>Out Date</label><br>
-                <input type="date" name=""/>
-              </span>
-
-            <!-- VISTA 4 -->
-              <span id="viewForm4"> 
-                <div class="row">
-                    <div class="col-md-6">
-                        
-                        <label>Nombre</label><br>
-                        <input type="text" name=""/>
-
-                        <label>Telefono</label><br>
-                        <input type="text" name=""/>
-                        
-                        <label>Email</label><br>
-                        <input type="text" name=""/>
-                        
-                        <label>Fecha de Nacimiento</label><br>
-                        <input type="date" name=""/>
-
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <label>Apellido</label><br>
-                        <input type="text" name=""/>
-
-                        <label>Cedula</label><br>
-                        <input type="text" name=""/>
-                        
-                        <label>Edad</label><br>
-                        <input type="number" name=""/>
-                        
-                        <label>Genero</label><br>
-                            
-                        <table>
-                            <tr>
-                                <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="" value="1"></label></td>
-                                <td class="radioFormLabel"> M</td>
-
-                                <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="" value="1"></label></td>
-                                <td class="radioFormLabel"> F</td>
+                                      <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="genderC" value="2"></label></td>
+                                      <td class="radioFormLabel"> F</td>
 
 
-                                <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="" value="1"></label></td>
-                                <td class="radioFormLabel"> Other</td>
-                            </tr>                            
-                        </table>
-                        
-                    </div>                    
-                </div>  
-              </span>
+                                      <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="genderC" value="3"></label></td>
+                                      <td class="radioFormLabel"> Other</td>
+                                  </tr>                            
+                              </table>
+                              
+                          </div>                    
+                      </div>  
+                    </span>
 
-            <!-- VISTA 5 -->
-              <span id="viewForm1"> 
-                <div class="row">
-                <button type="button" class="buttonForm" data-toggle="modal" data-target="#myModal">Superior King</button>
-                <button type="button" class="buttonForm" data-toggle="modal" data-target="#myModal">Superior Double</button>
-                </div>  
-              </span>               
-            </form>
-          </div>
-        </div>
+                  <!--*********************-->
+                  <!--                     -->
+                  <!-- VISTA 7:            -->
+                  <!-- Rooms               -->
+                  <!--                     -->
+                  <!--*********************-->
+                    <span id="viewForm7"> 
+                      <div class="row centered">
+                      <button type="button" class="buttonForm"  id ="room1" data-toggle="modal" data-target="#ModalRooms" data-room=1>
+                        Superior King
+                      </button>
+                      <button type="button" class="buttonForm"  id ="room2" data-toggle="modal" data-target="#ModalRooms" data-room=2>
+                        Superior Double
+                      </button>
+                      <button type="button" class="buttonForm"  id ="room3" data-toggle="modal" data-target="#ModalRooms" data-room=3>
+                        Superior Double
+                      </button>
+                      <button type="button" class="buttonForm"  id ="room4" data-toggle="modal" data-target="#ModalRooms" data-room=4>
+                        Superior Double
+                      </button>
+                      <button type="button" class="buttonForm"  id ="room5" data-toggle="modal" data-target="#ModalRooms" data-room=5>
+                        Superior King
+                      </button>
+                      <button type="button" class="buttonForm"  id ="room6" data-toggle="modal" data-target="#ModalRooms" data-room=6>
+                        Superior Double
+                      </button>
+                      <button type="button" class="buttonForm"  id ="room7" data-toggle="modal" data-target="#ModalRooms" data-room=7>
+                        Superior Double
+                      </button>
+                      <button type="button" class="buttonForm"  id ="room8" data-toggle="modal" data-target="#ModalRooms" data-room=8>
+                        Superior Double
+                      </button>                
 
-      </div> <!-- fin row -->
-      </div>
+                      </div>  
+                    </span>               
+                  
+                  </form>
+                </div>
+            </div>
+        </div> <!-- fin row -->
+    </div>
     </div>
 
-<!-- Modal Tipo Habitacion-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+    <!--*************************-->
+    <!--                         -->
+    <!-- MODAL:                  -->
+    <!-- Tipo de habitacion      -->
+    <!--                         -->
+    <!--*************************-->
+      <div class="modal fade" id="ModalRooms" role="dialog" aria-labelledby="ModalRoomsLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="ModalRoomsLabel">Room's Views</h4>
+            </div>
+            <div class="modal-body centered">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="selectRoom()" data-dismiss="modal">Pick this view</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
@@ -225,119 +430,198 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-
     <script type="text/javascript">
 
-      // Cantidad slides del form
-      var cant = 6;
+      //******************************************************//
+      //                                                      //
+      //                 CALENDARS FUNCTIONS                  //
+      //                                                      //
+      //******************************************************//
+        var currDate = new Date();
+        var y = currDate.getFullYear();
+        
+        var m = currDate.getMonth() + 1;
+        if (m < 10){m = "0"+m}
+        
+        var d = currDate.getDate();
 
-      // Ocultando todos los slide que no son el 
-      // primero
-      for(var i=2 ; i < cant; i++){
-          $("#iconForm"+i).hide();
-          $("#viewForm"+i).hide();
-          $("#labelForm"+i).hide();
-      }
+        var ymd = y+"-"+m+"-"+d
 
-      // Contador de slide en el que estoy parado
-      var count = 1;
+        console.log(ymd);
+        var myCalendar;
 
-      // funcion que hjabilita el boton de seguir 
-      // cuando las opciones estan llenas
-      function enableArrow(){
-          if (document.getElementById("civilState1").value != "0" && 
-              document.getElementById("Nationality1").value != "0" && 
-              document.getElementById("EducationLevel1").value != "0" ){
-              $(".arrowForm.right").removeClass("unable");
-          }else{
-              $(".arrowForm.right").addClass("unable");
-
-          }
-      }
-
-      // funcion flecha siguiente
-      function nextForm(){
-          if(!$(".arrowForm.right").hasClass("unable")){
-              
-              // CONTADOR DE FRAGMENTO FORM
-              var iconFormN_1 = "#iconForm"+count;
-              var viewFormN_1 = "#viewForm"+count;
-              var labelFormN_1 = "#labelForm"+count;
-              
-              if( count < cant ){
-                  count+=1;
-              }
-              
-              var iconFormN = "#iconForm"+count;
-              var viewFormN = "#viewForm"+count;
-              var labelFormN = "#labelForm"+count;
-
-              $(viewFormN_1).hide();
-              $(viewFormN).show();
-
-              $(iconFormN_1).hide();
-              $(iconFormN).show();
-
-              $(labelFormN_1).hide();
-              $(labelFormN).show();        
-
-              $(viewFormN).stop().animate({left: -1000}, 400);
-
-              if($("#viewForm2").is(":visible")){
-                  $(".arrowForm.left").removeClass("unable");
-              }
-
-              if($("#viewForm"+(cant-1)).is(":visible")){
-                  $(".arrowForm.right").addClass("unable"); 
-              }
-          }
-      }
-
-      // funcion flecha anterior
-      function prevForm(){
-          if(!$(".arrowForm.left").hasClass("unable")){
-              
-              // CONTADOR DE FRAGMENTO FORM
-              var viewFormN_1 = "#viewForm"+count;
-              var labelFormN_1 = "#labelForm"+count;
-              var iconFormN_1 = "#iconForm"+count;
-              
-              if( 1 < count ){
-                  count-=1;
-              }
-
-              var labelFormN = "#labelForm"+count;
-              var viewFormN = "#viewForm"+count;
-              var iconFormN = "#iconForm"+count;
-
-              $(viewFormN_1).hide();
-              $(viewFormN).show();
-
-
-              $(iconFormN_1).hide();
-              $(iconFormN).show();
-
-              $(labelFormN_1).hide();
-              $(labelFormN).show();        
-
-
-              document.getElementById(viewFormN.split("#")[1]).style.display = "inline";
-
-              if($("#viewForm2").is(":visible")){
-                  $(".arrowForm.left").removeClass("unable");
-              }
-
-              if($("#viewForm1").is(":visible")){
-                  $(".arrowForm.left").addClass("unable");
-              }        
+        /***************************/
+        /*                         */
+        /* DoOnLoad():             */
+        /* Cargar calendarios      */
+        /*                         */
+        /***************************/
+        function doOnLoad() {
+          myCalendarInOut = new dhtmlXCalendarObject(["cal_DateIn","cal_DateOut"]);
+          myCalendarDoB = new dhtmlXCalendarObject(["cal_DateBirth","cal_DateBirthC"]);
+        
+          myCalendarInOut.setSensitiveRange(ymd,null);
           
-              enableArrow();
-          }
-      }
+          myCalendarInOut.hideTime();
+          myCalendarDoB.hideTime();
+        }
 
-      function openModal(){
-        console.log("pipi");
-      }
+      //******************************************************//
+      //                                                      //
+      //                   MODAL FUNCTIONS                    //
+      //                                                      //
+      //******************************************************//
+        var room = "";
+
+        $('#ModalRooms').on('show.bs.modal', function(e){
+            room = $(e.relatedTarget).data('room');
+        });
+
+        /***************************/
+        /*                         */
+        /* selectRoom():           */
+        /* Seleccionar habitacion  */
+        /*                         */
+        /***************************/
+        function selectRoom(){
+            for(var i = 1 ; i <= 8 ; i++){
+              if(i != room){
+                $("#room"+i).removeClass("active");
+              }else{
+                $("#room"+room).addClass("active");
+              }
+            }
+        };
+
+      //******************************************************//
+      //                                                      //
+      //                  ARROWS FUNCTIONS                    //
+      //                                                      //
+      //******************************************************//
+        // Cantidad slides del form
+        var cant = 8;
+
+        // Ocultando todos los slide que no son el 
+        // primer form
+        for(var i=2 ; i < cant; i++){
+            $("#iconForm"+i).hide();
+            $("#viewForm"+i).hide();
+            $("#labelForm"+i).hide();
+        }
+
+        // Contador de slide en el que estoy parado
+        var count = 1;
+
+        /***************************/
+        /*                         */
+        /* enableArrow():          */
+        /* funcion que habilita el */
+        /* boton de seguir cuando  */
+        /* las opciones estan      */ 
+        /* llenas                  */
+        /*                         */
+        /***************************/
+        function enableArrow(){
+            if (document.getElementById("nameU").value != "" && 
+                document.getElementById("lastnameU").value != "" && 
+                document.getElementById("code").value != "" && 
+                document.getElementById("emailU").value != "" ){
+                $(".arrowForm.right").removeClass("unable");
+            }else{
+                $(".arrowForm.right").addClass("unable");
+
+            }
+        }
+
+        /***************************/
+        /*                         */
+        /* nextForm():             */
+        /* funcion flecha siguiente*/
+        /*                         */
+        /***************************/
+        function nextForm(){
+            if(!$(".arrowForm.right").hasClass("unable")){
+                
+                // CONTADOR DE FRAGMENTO FORM
+                var iconFormN_1 = "#iconForm"+count;
+                var viewFormN_1 = "#viewForm"+count;
+                var labelFormN_1 = "#labelForm"+count;
+                
+                if( count < cant ){
+                    count+=1;
+                }
+                
+                var iconFormN = "#iconForm"+count;
+                var viewFormN = "#viewForm"+count;
+                var labelFormN = "#labelForm"+count;
+
+                $(viewFormN_1).hide();
+                $(viewFormN).show();
+
+                $(iconFormN_1).hide();
+                $(iconFormN).show();
+
+                $(labelFormN_1).hide();
+                $(labelFormN).show();        
+
+                $(viewFormN).stop().animate({left: -1000}, 400);
+
+                if($("#viewForm2").is(":visible")){
+                    $(".arrowForm.left").removeClass("unable");
+                }
+
+                if($("#viewForm"+(cant-1)).is(":visible")){
+                    $(".arrowForm.right").addClass("unable"); 
+                }
+            }
+        }
+
+        /***************************/
+        /*                         */
+        /* nextForm():             */
+        /* funcion flecha anterior */
+        /*                         */
+        /***************************/
+        function prevForm(){
+            if(!$(".arrowForm.left").hasClass("unable")){
+                
+                // CONTADOR DE FRAGMENTO FORM
+                var viewFormN_1 = "#viewForm"+count;
+                var labelFormN_1 = "#labelForm"+count;
+                var iconFormN_1 = "#iconForm"+count;
+                
+                if( 1 < count ){
+                    count-=1;
+                }
+
+                var labelFormN = "#labelForm"+count;
+                var viewFormN = "#viewForm"+count;
+                var iconFormN = "#iconForm"+count;
+
+                $(viewFormN_1).hide();
+                $(viewFormN).show();
+
+
+                $(iconFormN_1).hide();
+                $(iconFormN).show();
+
+                $(labelFormN_1).hide();
+                $(labelFormN).show();        
+
+
+                document.getElementById(viewFormN.split("#")[1]).style.display = "inline";
+
+                if($("#viewForm2").is(":visible")){
+                    $(".arrowForm.left").removeClass("unable");
+                }
+
+                if($("#viewForm1").is(":visible")){
+                    $(".arrowForm.left").addClass("unable");
+                }        
+            
+                enableArrow();
+            }
+        }
     </script>
   </body>
 </html>
