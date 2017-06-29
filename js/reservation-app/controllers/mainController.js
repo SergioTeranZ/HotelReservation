@@ -1,4 +1,4 @@
-	app.controller("mainController", function($scope, $http, ReservationService){
+	app.controller("mainController", function($scope, $http){
 
 	/*CALENDAR VAR*/
 	$scope.ymd = ""; $scope.myCalendar;
