@@ -9,6 +9,7 @@
 			<!-- INCLUDE APPLICATION SPECIFIC CSS AND JAVASCRIPT -->
 			<script type="text/javascript" src="js/reservation-app/app.js"></script>
 			<script type="text/javascript" src="js/reservation-app/controllers/mainController.js"></script>
+			<script type="text/javascript" src="js/reservation-app/services/RegistrationService.js"></script>
 	  <!-- FIN HEAD TEMPLATE -->
 
 		<!-- HEAD: INDEX RESERVA -->
@@ -164,7 +165,7 @@
 	              <!--                         -->
 	              <!--*************************-->
 	                <div class="col-md-1 arrowCol">
-	                      <i class="fa fa-angle-left unable arrowForm left" aria-hidden="true" onclick="prevForm()"></i>
+	                      <i class="fa fa-angle-left unable arrowForm left" aria-hidden="true" ng-click="prevForm();"></i>
 	                </div>
 
 	              <!--*************************-->
@@ -173,7 +174,7 @@
 	              <!--                         -->
 	              <!--*************************-->
 	                <div class="col-md-1 col-md-push-6 arrowCol" >
-	                      <i class="fa fa-angle-right unable arrowForm right" aria-hidden="true" onclick="nextForm()"></i>
+	                      <i class="fa fa-angle-right arrowForm right" aria-hidden="true" ng-click="nextForm();" ng-class=" {'unable' : (emailU == null || emailU == '') || (nameU == null || nameU == '') || (lastnameU == null || lastnameU == '')}" ></i>
 	                </div>          
 
 	              <!--*************************-->
@@ -193,16 +194,33 @@
 	                  <!--*********************-->
 	                    <span id="viewForm1">   
 	                      <label>Email</label><br>
-	                      <input type="email" name="" id="emailU"  placeholder="example@mail.com" value="" onchange="enableArrow()"/>    
+	                      <input 	type="email" 
+	                      				name="emailU" 
+	                      				id="emailU" 
+	                      				placeholder="example@mail.com"
+	                      				ng-change="getPersonU();" 
+	                      				ng-model="emailU"/>    
 
 	                      <label>Name</label><br>
-	                      <input type="text" name="" id="nameU"  placeholder="Name" value="" onchange="enableArrow()"/>
+	                      <input 	type="text" 
+	                      				name="" 
+	                      				id="nameU"  
+	                      				placeholder="Name" 
+	                      				ng-model="nameU" />
 
 	                      <label>Lastname</label><br>
-	                      <input type="text" name="" id="lastnameU"  placeholder="Lastname" value="" onchange="enableArrow()"/>
+	                      <input 	type="text" 
+	                      				name="" 
+	                      				id="lastnameU"  
+	                      				placeholder="Lastname" 
+	                      				ng-model="lastnameU" />
 
 	                      <label>Code</label><br>
-	                      <input type="text" name="" id="code"  placeholder="Code" value="" onchange="enableArrow()"/> 
+	                      <input 	type="text" 
+	                      				name="" 
+	                      				id="code"  
+	                      				placeholder="XXXX" 
+	                      				ng-model="code" /> 
 	                     
 	                    </span>
 
@@ -213,27 +231,55 @@
 	                  <!--                     -->
 	                  <!--*********************-->
 	                    <span id="viewForm2">   
-	                      <label>Id</label><br>
-	                      <input type="text" name="" id="idU"  placeholder="Id" value="" onchange="enableArrow()"/>    
+	                      <label>DNI</label><br>
+	                      <input 	type="text" 
+	                      				name="dniU" 
+	                      				id="dniU"  
+	                      				placeholder="DNI" 
+	                      				ng-model="dniU"/>
 
 	                      <label>Phone</label><br>
-	                      <input type="text" name="" id="phoneU"  placeholder="phone" value="" onchange="enableArrow()"/>
+	                      <input 	type="text" 
+	                      				name="phoneU" 
+	                      				id="phoneU"  
+	                      				placeholder="phone" 
+	                      				ng-model="phoneU"/>
 
 	                      <label>Date of Birth</label><br>
-	                      <input type="text" id="cal_DateBirth">
+	                      <input 	type="text" 
+	                      				id="cal_DateBirth">
 	                              
 	                      <label>Gender</label><br>
 	                          
 	                      <table>
 	                          <tr>
-	                              <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="gender" value="1"></label></td>
+	                              <td class="radioForm">
+	                              	<label class="radio-inline">
+		                              	<input 	class="radioForm" 
+		                              					type="radio" 
+		                              					name="gender" 
+		                              					value="1">
+                        					</label></td>
 	                              <td class="radioFormLabel"> M</td>
 
-	                              <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="gender" value="2"></label></td>
+	                              <td class="radioForm">
+	                              	<label class="radio-inline">
+		                              	<input 	class="radioForm" 
+		                              					type="radio" 
+		                              					name="gender" 
+		                              					value="2">
+                        					</label></td>
+
 	                              <td class="radioFormLabel"> F</td>
 
 
-	                              <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="gender" value="3"></label></td>
+	                              <td class="radioForm">
+	                              	<label class="radio-inline">
+		                              	<input 	class="radioForm" 
+		                              					type="radio" 
+		                              					name="gender" 
+		                              					value="3">
+                        					</label></td>
 	                              <td class="radioFormLabel"> Other</td>
 	                          </tr>                            
 	                      </table>
@@ -486,105 +532,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <!--***********************************-->
-    <!--                                   -->
-    <!--              SCRIPT               -->
-    <!--                                   -->
-    <!--***********************************-->
-		  <script type="text/javascript">
-
-
-
-					/***************************/
-					/*                         */
-					/* nextForm():             */
-					/* funcion flecha siguiente*/
-					/*                         */
-					/***************************/
-						function nextForm(){
-						    if(!$(".arrowForm.right").hasClass("unable")){
-						        
-						        // CONTADOR DE FRAGMENTO FORM
-						        var iconFormN_1 = "#iconForm"+count;
-						        var viewFormN_1 = "#viewForm"+count;
-						        var labelFormN_1 = "#labelForm"+count;
-						        
-						        if( count < cant ){
-						            count+=1;
-						        }
-						        
-						        var iconFormN = "#iconForm"+count;
-						        var viewFormN = "#viewForm"+count;
-						        var labelFormN = "#labelForm"+count;
-
-						        $(viewFormN_1).hide();
-						        $(viewFormN).show();
-
-						        $(iconFormN_1).hide();
-						        $(iconFormN).show();
-
-						        $(labelFormN_1).hide();
-						        $(labelFormN).show();        
-
-						        $(viewFormN).stop().animate({left: -1000}, 400);
-
-						        if($("#viewForm2").is(":visible")){
-						            $(".arrowForm.left").removeClass("unable");
-						        }
-
-						        if($("#viewForm"+(cant-1)).is(":visible")){
-						            $(".arrowForm.right").addClass("unable"); 
-						        }
-						    }
-						}
-
-					/***************************/
-					/*                         */
-					/* nextForm():             */
-					/* funcion flecha anterior */
-					/*                         */
-					/***************************/
-						function prevForm(){
-						    if(!$(".arrowForm.left").hasClass("unable")){
-						        
-						        // CONTADOR DE FRAGMENTO FORM
-						        var viewFormN_1 = "#viewForm"+count;
-						        var labelFormN_1 = "#labelForm"+count;
-						        var iconFormN_1 = "#iconForm"+count;
-						        
-						        if( 1 < count ){
-						            count-=1;
-						        }
-
-						        var labelFormN = "#labelForm"+count;
-						        var viewFormN = "#viewForm"+count;
-						        var iconFormN = "#iconForm"+count;
-
-						        $(viewFormN_1).hide();
-						        $(viewFormN).show();
-
-
-						        $(iconFormN_1).hide();
-						        $(iconFormN).show();
-
-						        $(labelFormN_1).hide();
-						        $(labelFormN).show();        
-
-
-						        document.getElementById(viewFormN.split("#")[1]).style.display = "inline";
-
-						        if($("#viewForm2").is(":visible")){
-						            $(".arrowForm.left").removeClass("unable");
-						        }
-
-						        if($("#viewForm1").is(":visible")){
-						            $(".arrowForm.left").addClass("unable");
-						        }        
-						    
-						        enableArrow();
-						    }
-						}
-		  </script>
 <!-- FIN BODY RESERVA -->
 
 </body>
