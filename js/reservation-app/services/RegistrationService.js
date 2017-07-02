@@ -5,6 +5,7 @@ app.service("RegistrationService", function ($q, $http) {
     var base_url = 'http://back.lorebi.com:9763/hotel/';
     var url_booking = base_url+"booking/"; 
     var url_person = base_url+"person/"; 
+    var url_room = base_url+"room/"; 
 
     /***************************/
     /*                         */
@@ -46,6 +47,27 @@ app.service("RegistrationService", function ($q, $http) {
         });
             return defered.promise;
     };
+
+    /***************************/
+    /*                         */
+    /* listRooms():            */
+    /* trae gente en el        */
+    /* sistema                 */
+    /*                         */
+    /***************************/
+    this.listRooms = function listRooms (obj){
+        var defered = $q.defer(); 
+        $http({
+            method: 'POST',
+            url: url_room + "list",
+            data: obj,
+        }).then(function(response) {
+            defered.resolve(response.data); 
+        }, function(errorMsg){
+            defered.reject(errorMsg);
+        });
+            return defered.promise;
+    };    
 
 });
 

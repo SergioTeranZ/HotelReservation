@@ -6,7 +6,7 @@ h1, h2, h3 {
 
 /****************************/
 /*                          */
-/*          BODDY           */
+/*           BODY           */
 /*                          */
 /****************************/
     html{
@@ -288,9 +288,11 @@ h1, h2, h3 {
         -ms-user-select:none;
         user-select:none;
 
+        /*max-width: 40%;*/
         min-width: 40%;
-        max-width: 40%;
         
+        margin: 0.3em;    
+        min-height: 4em;    
     }
 
     .buttonForm:hover,.buttonForm.active{
@@ -316,8 +318,23 @@ h1, h2, h3 {
         border-color: rgb(0,101,171);
     }
 
-/****************************/
-/*                          */
-/*        CALENDAR          */
-/*                          */
-/****************************/  
+    .btn.full{
+        width: 100%;
+    }
+
+    .labelCompanion{
+        background-color: rgb(197,197,197);
+        padding:0.5em;
+        color: #fff;
+        margin: 0.1em;
+    }
+
+    .lblIcon{
+        padding: 0.2em;
+        float: right;
+    }
+
+    button:disabled,.btn-primary[disabled]:hover{
+        background-color: rgb(184,184,184);
+        border-color: rgb(184,184,184);
+    }

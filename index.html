@@ -131,16 +131,6 @@
 	                <!--                         -->
 	                <!--*************************-->
 	                    <span class="labelForm" id="labelForm1">{{labelForm}}</span>
-	                    <!-- 
-	                    <span class="labelForm" id="labelForm1">Personal Data</span>
-	                    <span class="labelForm" id="labelForm2">Personal Data</span>
-	                    <span class="labelForm" id="labelForm3">Personal Data</span>
-	                    <span class="labelForm" id="labelForm4">Personal Data</span>
-	                    <span class="labelForm" id="labelForm5">Reservation Data</span>
-	                    <span class="labelForm" id="labelForm6">Companion</span>
-	                    <span class="labelForm" id="labelForm7">Rooms</span>
-	                    <span class="labelForm" id="labelForm8">Reservation</span>
-	                    -->
 	                    <br>
 	                  
 	                <!--*************************-->
@@ -148,15 +138,32 @@
 	                <!--   ICONOS FORMULARIOS    -->
 	                <!--                         -->
 	                <!--*************************-->
-	                    <i id="iconForm1" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
-	                    <i id="iconForm2" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
-	                    <i id="iconForm3" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
-	                    <i id="iconForm4" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
-	                    <i id="iconForm5" class="fa fa-calendar       iconForm" aria-hidden="true"></i>
-	                    <i id="iconForm6" class="fa fa-address-card-o iconForm" aria-hidden="true"></i>
-	                    <i id="iconForm7" class="fa fa-bed            iconForm" aria-hidden="true"></i>
-	                    <i id="iconForm8" class="fa fa-money          iconForm" aria-hidden="true"></i>
+	                    <i 	id="iconForm" 
+	                    		class="iconForm" 
+	                    		aria-hidden="true" 
+	                    		ng-class="{	'fa fa-address-card-o':(count <= 4 || count == 6),
+	                    								'fa fa-calendar':(count == 5),
+	                    								'fa fa-bed':(count == 7),
+	                    								'fa fa-money':(count == 8)}"></i>
 	                </h1>
+
+	                <!--*************************-->
+	                <!--                         -->
+	                <!--    LABELS COMPANIONS    -->
+	                <!--                         -->
+	                <!--*************************-->
+	                <span ng-show="count == 6 && companions !=[]">
+	                	<div class="row">
+	                	<div class="col-md-6">
+	                		
+	                	<div ng-repeat="con in companions" class="labelCompanion">
+	                		{{con.first_name}} 
+	                		<span class="fa fa-times  lblIcon" ng-click="deleteCompanion(con.email);"></span>
+	                		<span class="fa fa-pencil lblIcon" ng-click="editCompanion(con.email);"></span> 
+	                	</div>
+	                	</div>
+	                	</div>
+	                </span>
 	              </div>
 
 	              <!--*************************-->
@@ -174,7 +181,10 @@
 	              <!--                         -->
 	              <!--*************************-->
 	                <div class="col-md-1 col-md-push-6 arrowCol" >
-	                      <i class="fa fa-angle-right arrowForm right" aria-hidden="true" ng-click="nextForm();" ng-class=" {'unable' : (emailU == null || emailU == '') || (nameU == null || nameU == '') || (lastnameU == null || lastnameU == '')}" ></i>
+	                      <i 	class="fa fa-angle-right arrowForm right" 
+	                      		aria-hidden="true" 
+	                      		ng-click="nextForm();" 
+	                      		ng-class=" {'unable' : 	(emailU == null || emailU == '') || (nameU == null || nameU == '') || (lastnameU == null || lastnameU == '') || (count == 8)}" ></i>
 	                </div>          
 
 	              <!--*************************-->
@@ -192,7 +202,7 @@
 	                  <!-- code                -->
 	                  <!--                     -->
 	                  <!--*********************-->
-	                    <span id="viewForm1">   
+	                    <span id="viewForm7">   
 	                      <label>Email</label><br>
 	                      <input 	type="email" 
 	                      				name="emailU" 
@@ -242,47 +252,28 @@
 	                      <input 	type="text" 
 	                      				name="phoneU" 
 	                      				id="phoneU"  
-	                      				placeholder="phone" 
+	                      				placeholder="(0000) 000-00-00" 
 	                      				ng-model="phoneU"/>
 
 	                      <label>Date of Birth</label><br>
 	                      <input 	type="text" 
-	                      				id="cal_DateBirth">
+	                      				id="cal_DateBirthU"
+	                      				ng-model="dateBirthU">
 	                              
 	                      <label>Gender</label><br>
-	                          
-	                      <table>
-	                          <tr>
-	                              <td class="radioForm">
-	                              	<label class="radio-inline">
-		                              	<input 	class="radioForm" 
-		                              					type="radio" 
-		                              					name="gender" 
-		                              					value="1">
-                        					</label></td>
-	                              <td class="radioFormLabel"> M</td>
-
-	                              <td class="radioForm">
-	                              	<label class="radio-inline">
-		                              	<input 	class="radioForm" 
-		                              					type="radio" 
-		                              					name="gender" 
-		                              					value="2">
-                        					</label></td>
-
-	                              <td class="radioFormLabel"> F</td>
-
-
-	                              <td class="radioForm">
-	                              	<label class="radio-inline">
-		                              	<input 	class="radioForm" 
-		                              					type="radio" 
-		                              					name="gender" 
-		                              					value="3">
-                        					</label></td>
-	                              <td class="radioFormLabel"> Other</td>
-	                          </tr>                            
-	                      </table>
+                    		<div class="row">
+                        		<div class="col-md-4 radioForm" ng-repeat="gen in genders" for="{{gen}}">
+                            	<label class="radio-inline">
+                              	<input 	class="radioForm" 
+                              					type="radio" 
+                              					name="gender"
+                              					value="{{gen}}"
+                              					ng-click="setGender(gen);"
+                              					ng-model="genderU">
+                    					</label>
+                        		<span class="radioFormLabel">	{{gen}}</span>
+                        		</div>
+                        </div>
 	                     
 	                    </span>                    
 
@@ -296,23 +287,22 @@
 	                  <!--*********************-->
 	                    <span id="viewForm3">   
 	                      <label>Civil State</label><br>
-	                      <select id="civilState1" onchange="enableArrow()">
+	                      <select id="civilState1">
 	                          <option selected="" disabled="" value="0">Select Civil State</option>
-	                          <option value="1">Civil State 1</option>
-	                          <option value="2">Civil State 2</option>
-	                          <option value="3">Civil State 3</option>
+	                          <option value="1">Single</option>
+	                          <option value="2">Married</option>
+	                          <option value="3">Divorced</option>
 	                      </select>
 
 	                      <label>Nationality</label><br>
-	                      <select id="Nationality1" onchange="enableArrow()">
-	                          <option selected="" disabled="" value="0">Nationality</option>
-	                          <option value="1">Nationality1</option>
-	                          <option value="2">Nationality2</option>
-	                          <option value="3">Nationality3</option>
-	                      </select>
+	                      <input 	type="text" 
+	                      				name="nationalityU" 
+	                      				id="nationalityU"  
+	                      				placeholder="Nationality" 
+	                      				ng-model="nationalityU"/>
 
 	                      <label>Education Level</label><br>
-	                      <select id="EducationLevel1" onchange="enableArrow()">
+	                      <select id="EducationLevel1">
 	                          <option selected="" disabled="" value="0">EducationLevel</option>
 	                          <option value="1">EducationLevel1</option>
 	                          <option value="2">EducationLevel2</option>
@@ -328,23 +318,25 @@
 	                  <!--*********************-->
 	                    <span id="viewForm4">   
 	                      <label>Country</label><br>
-	                      <select id="Country" onchange="enableArrow()">
-	                          <option selected="" disabled="" value="0">Country</option>
-	                          <option value="1">Country1</option>
-	                          <option value="2">Country2</option>
-	                          <option value="3">Country3</option>
-	                      </select>
+	                      <input 	type="text" 
+	                      				name="countryU" 
+	                      				id="countryU"  
+	                      				placeholder="Country" 
+	                      				ng-model="countryU"/>
 
 	                      <label>State</label><br>
-	                      <select id="State" onchange="enableArrow()">
-	                          <option selected="" disabled="" value="0">State</option>
-	                          <option value="1">State1</option>
-	                          <option value="2">State2</option>
-	                          <option value="3">State3</option>
-	                      </select>
+	                      <input 	type="text" 
+	                      				name="stateU" 
+	                      				id="stateU"  
+	                      				placeholder="State" 
+	                      				ng-model="stateU"/>
 
 	                      <label>City</label><br>
-	                      <input type="text" name="" id="city"  placeholder="City" value=""/>
+	                      <input 	type="text" 
+	                      				name="cityU" 
+	                      				id="cityU"  
+	                      				placeholder="City" 
+	                      				ng-model="cityU"/>
 	                    </span>            
 	                  
 	                  <!--*********************-->
@@ -357,12 +349,16 @@
 	                      <div class="row">
 	                        <div class="col-md-6">
 	                          <label>In Date</label><br>
-	                          <input type="text" id="cal_DateIn">
+	                          <input 	type="text" 
+	                          				id="cal_DateIn"
+	                          				ng-model="dateIn">
 	                          
 	                        </div>
 	                        <div class="col-md-6">
 	                          <label>Out Date</label><br>
-	                          <input type="text" id="cal_DateOut">
+	                          <input 	type="text" 
+	                          				id="cal_DateOut"
+	                          				ng-model="dateOut">
 	                          
 	                        </div>
 	                      </div> 
@@ -373,55 +369,85 @@
 	                  <!-- VISTA 6:            -->
 	                  <!-- nameC,phoneC,emailC -->
 	                  <!-- BirthC,lastnameC    -->
-	                  <!-- idC,ageC,genderC    -->
+	                  <!-- dniC,genderC        -->
 	                  <!--                     -->
 	                  <!--*********************-->
 	                    <span id="viewForm6"> 
+	                    	<div class="row">
+	                    		<div class="col-md-12">
+
+														<label>Email</label><br>
+			                      <input 	type="email" 
+                      				name="emailC" 
+                      				id="emailC" 
+                      				placeholder="example@mail.com"
+                      				ng-change="getPersonC();" 
+                      				ng-model="emailC"/>
+	                    		
+	                    		</div>
+	                    	</div>
+
 	                      <div class="row">
 	                          <div class="col-md-6">
-	                              
-	                              <label>Name</label><br>
-	                              <input type="text" name=""/>
 
-	                              <label>Phone</label><br>
-	                              <input type="text" name=""/>
-	                              
-	                              <label>Email</label><br>
-	                              <input type="text" name=""/>
-	                              
-	                              <label>Date of Birth</label><br>
-	                              <input type="text" id="cal_DateBirthC">
+	                            <label>Name</label><br>
+				                      <input 	type="text" 
+				                      				name="nameC" 
+				                      				id="nameC"  
+				                      				placeholder="Name" 
+				                      				ng-model="nameC"/>
 
+	                            <label>DNI</label><br>
+				                      <input 	type="text" 
+				                      				name="dniC" 
+				                      				id="dniC"  
+				                      				placeholder="DNI" 
+				                      				ng-model="dniC"/>
+
+	                            <label>Date of Birth</label><br>
+                              <input 	type="text" 
+                              				id="cal_DateBirthC"
+                              				ng-model="dateBirthC">
 	                          </div>
-	                          
+
 	                          <div class="col-md-6">
-	                              <label>Lastname</label><br>
-	                              <input type="text" name=""/>
+	                            <label>Lastname</label><br>
+				                      <input 	type="text" 
+				                      				name="lastnameC" 
+				                      				id="lastnameC"  
+				                      				placeholder="Lastname" 
+				                      				ng-model="lastnameC"/>
 
-	                              <label>Id</label><br>
-	                              <input type="text" name=""/>
-	                              
-	                              <label>Age</label><br>
-	                              <input type="number" name=""/>
-	                              
-	                              <label>Gender</label><br>
-	                                  
-	                              <table>
-	                                  <tr>
-	                                      <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="genderC" value="1"></label></td>
-	                                      <td class="radioFormLabel"> M</td>
+	                            <label>Phone</label><br>
+				                      <input 	type="text" 
+				                      				name="phoneC" 
+				                      				id="phoneC"  
+				                      				placeholder="(0000) 000-00-00" 
+				                      				ng-model="phoneC"/>
 
-	                                      <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="genderC" value="2"></label></td>
-	                                      <td class="radioFormLabel"> F</td>
+				                      <label>Gender</label><br>
+			                    		<div class="row">
+			                        		<div class="col-md-4 radioForm" ng-repeat="g in genders" for="{{g}}">
+			                            	<label class="radio-inline">
+			                              	<input 	class="radioForm" 
+			                              					type="radio" 
+			                              					name="genderC"
+			                              					ng-value="g"
+			                              					ng-click="setGenderC(g);"
+			                              					ng-model="genderC">
+			                    					</label>
+			                        		<span class="radioFormLabel">	{{g}}</span>
+			                        		</div>
+                      				</div> 
+	                          </div>                  
+	                      </div> 
 
-
-	                                      <td class="radioForm"><label class="radio-inline"><input class="radioForm" type="radio" name="genderC" value="3"></label></td>
-	                                      <td class="radioFormLabel"> Other</td>
-	                                  </tr>                            
-	                              </table>
-	                              
-	                          </div>                    
-	                      </div>  
+	                      <div class="row">
+	                      	<div class="col-md-12">
+	                      	<br>
+	              						<button type="button" ng-click="addCompanion()" class="btn btn-primary full" ng-disabled=" cantCompanion == maxCompanion">Add Companion</button>
+	                      	</div>
+	                      </div> 
 	                    </span>
 
 	                  <!--*********************-->
@@ -430,33 +456,11 @@
 	                  <!-- Rooms               -->
 	                  <!--                     -->
 	                  <!--*********************-->
-	                    <span id="viewForm7"> 
+	                    <span id="viewForm1"> 
 	                      <div class="row centered">
-	                      <button type="button" class="buttonForm"  id ="room1" data-toggle="modal" data-target="#ModalRooms" data-room=1>
-	                        Superior King
+	                      <button type="button" ng-repeat="r in rooms" class="buttonForm"  id ="room{{r.id}}" data-toggle="modal" data-target="#ModalRooms" data-room={{r.id}}>
+	                        {{r.name}}
 	                      </button>
-	                      <button type="button" class="buttonForm"  id ="room2" data-toggle="modal" data-target="#ModalRooms" data-room=2>
-	                        Superior Double
-	                      </button>
-	                      <button type="button" class="buttonForm"  id ="room3" data-toggle="modal" data-target="#ModalRooms" data-room=3>
-	                        Superior Double
-	                      </button>
-	                      <button type="button" class="buttonForm"  id ="room4" data-toggle="modal" data-target="#ModalRooms" data-room=4>
-	                        Superior Double
-	                      </button>
-	                      <button type="button" class="buttonForm"  id ="room5" data-toggle="modal" data-target="#ModalRooms" data-room=5>
-	                        Superior King
-	                      </button>
-	                      <button type="button" class="buttonForm"  id ="room6" data-toggle="modal" data-target="#ModalRooms" data-room=6>
-	                        Superior Double
-	                      </button>
-	                      <button type="button" class="buttonForm"  id ="room7" data-toggle="modal" data-target="#ModalRooms" data-room=7>
-	                        Superior Double
-	                      </button>
-	                      <button type="button" class="buttonForm"  id ="room8" data-toggle="modal" data-target="#ModalRooms" data-room=8>
-	                        Superior Double
-	                      </button>                
-
 	                      </div>  
 	                    </span>               
 	                  
@@ -511,7 +515,8 @@
             <!--                         -->
             <!--*************************-->
 	            <div class="modal-body centered">
-	              >>{{room}}<<
+	              
+	              >>{{roomSelected.name}}<<
 	            </div>
 
           	<!--*************************-->
