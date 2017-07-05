@@ -130,21 +130,22 @@
 	                <!--   LABELS FORMULARIOS    -->
 	                <!--                         -->
 	                <!--*************************-->
-	                    <span class="labelForm" id="labelForm1">{{labelForm}}</span>
-	                    <br>
+                    <span class="labelForm" id="labelForm1">{{labelForm}}</span>
+                    <br>
 	                  
 	                <!--*************************-->
 	                <!--                         -->
 	                <!--   ICONOS FORMULARIOS    -->
 	                <!--                         -->
 	                <!--*************************-->
-	                    <i 	id="iconForm" 
-	                    		class="iconForm" 
-	                    		aria-hidden="true" 
-	                    		ng-class="{	'fa fa-address-card-o':(count <= 4 || count == 6),
-	                    								'fa fa-calendar':(count == 5),
-	                    								'fa fa-bed':(count == 7),
-	                    								'fa fa-money':(count == 8)}"></i>
+                    <i 	id="iconForm" 
+                    		class="iconForm" 
+                    		aria-hidden="true" 
+                    		ng-class="{	'fa fa-address-card-o':(count <= 4 || count == 6),
+                    								'fa fa-calendar':(count == 5),
+                    								'fa fa-bed':(count == 7),
+                    								'fa fa-money':(count == 8)}"></i>
+	                
 	                </h1>
 
 	                <!--*************************-->
@@ -152,18 +153,19 @@
 	                <!--    LABELS COMPANIONS    -->
 	                <!--                         -->
 	                <!--*************************-->
-	                <span ng-show="count == 6 && companions !=[]">
-	                	<div class="row">
-	                	<div class="col-md-6">
-	                		
-	                	<div ng-repeat="con in companions" class="labelCompanion">
-	                		{{con.first_name}} 
-	                		<span class="fa fa-times  lblIcon" ng-click="deleteCompanion(con.email);"></span>
-	                		<span class="fa fa-pencil lblIcon" ng-click="editCompanion(con.email);"></span> 
-	                	</div>
-	                	</div>
-	                	</div>
-	                </span>
+		                <span ng-show="count == 6 && companions !=[]">
+		                	<div class="row">
+		                	<div class="col-md-6">
+		                		
+		                	<div ng-repeat="con in companions" class="labelCompanion" ng-show="con.type == 0">
+		                		{{con.first_name}} 
+		                		<span class="fa fa-times  lblIcon" ng-click="deleteCompanion(con.email);"></span>
+		                		<span class="fa fa-pencil lblIcon" ng-click="editCompanion(con.email);"></span> 
+		                	</div>
+		                	</div>
+		                	</div>
+		                </span>
+
 	              </div>
 
 	              <!--*************************-->
@@ -184,7 +186,40 @@
 	                      <i 	class="fa fa-angle-right arrowForm right" 
 	                      		aria-hidden="true" 
 	                      		ng-click="nextForm();" 
-	                      		ng-class=" {'unable' : 	(emailU == null || emailU == '') || (nameU == null || nameU == '') || (lastnameU == null || lastnameU == '') || (count == 8)}" ></i>
+	                      		ng-class=" {'unable' : 	
+	                      		(count == 1 && (
+	                      			(emailU == null || emailU == '') || 
+	                      			(nameU == null || nameU == '') || 
+	                      			(lastnameU == null || lastnameU == ''))
+	                      		) ||
+	                      		
+	                      		(count == 2 && (
+	                      			(dniU == null || dniU == '') || 
+	                      			(phoneU == null || phoneU == '') || 
+	                      			(dateBirthU == null || dateBirthU == '') || 
+	                      			(genderU == null || genderU == ''))
+	                      		) || 
+	                      		
+	                      		(count == 3 && (
+	                      			(nationalityU == null || nationalityU == '') )
+	                      		) ||
+
+	                      		(count == 4 && (
+	                      			(countryU == null || countryU == '') || 
+	                      			(stateU == null || stateU == '') || 
+	                      			(cityU == null || cityU == '') )
+	                      		) || 
+
+	                      		(count == 5 && (
+	                      			(dateIn == null || dateIn == '') ||
+	                      			(dateOut == null || dateOut == '') )
+	                      		) ||
+
+	                      		(count == 7 && (
+	                      			(roomSelected == null || roomSelected == '') )
+	                      		) ||
+
+	                      		(count == 8)}" ></i>
 	                </div>          
 
 	              <!--*************************-->
@@ -202,7 +237,7 @@
 	                  <!-- code                -->
 	                  <!--                     -->
 	                  <!--*********************-->
-	                    <span id="viewForm7">   
+	                    <span id="viewForm1">   
 	                      <label>Email</label><br>
 	                      <input 	type="email" 
 	                      				name="emailU" 
@@ -456,10 +491,33 @@
 	                  <!-- Rooms               -->
 	                  <!--                     -->
 	                  <!--*********************-->
-	                    <span id="viewForm1"> 
+	                    <span id="viewForm7"> 
 	                      <div class="row centered">
-	                      <button type="button" ng-repeat="r in rooms" class="buttonForm"  id ="room{{r.id}}" data-toggle="modal" data-target="#ModalRooms" data-room={{r.id}}>
+	                      <button 
+	                      		type="button" 
+	                      		ng-repeat="r in rooms" 
+	                      		ng-click="showRoom(r.id)"
+	                      		class="buttonForm"  
+	                      		id ="room{{r.id}}" 
+	                      		data-toggle="modal" 
+	                      		data-target="#ModalRooms" 
+	                      		data-room={{r.id}}>
 	                        {{r.name}}
+													<br>
+													<span id="roomInfo{{r.id}}">											
+														<label>Price:</label> 
+					              			{{r.rate}} $
+					              		<br>
+
+					              		<label>Capacity:</label> 
+					              			{{r.capacity}} Person
+					              		<br>
+					              		
+					              		<label>Available:</label> 
+					              			<span ng-show="r.bank != 0">Yes</span>
+					              			<span ng-show="r.bank == 0">No</span>
+					              		
+													</span>
 	                      </button>
 	                      </div>  
 	                    </span>               
@@ -471,9 +529,73 @@
 	                  <!--                     -->
 	                  <!--*********************-->
 	                    <span id="viewForm8">
+	                      
 	                      <div class="row">
-	                        facturilla
+	                        <div class="col-md-12">
+		                        <div class="row" id="roomInfoRow">
+			                        <div class="col-md-4" id="rommImgBill">
+			                        	{{roomSelected.img}}
+			                        </div> <!-- fin col-md-4 -->
+			                        <div class="col-md-8" id="roomInfoBill">
+			                        	<h1>	
+			                        	{{roomSelected.name}}
+			                        	</h1>
+			                        	<br>
+			                        	<h2>
+			                        	Capacity {{roomSelected.capacity}} Person(s)
+			                        	</h2>
+			                        </div> <!-- fin col-md-8 -->
+		                        </div> <!-- fin row roomInfoRow -->
+	                        </div> <!-- fin col-md-12 -->
+	                      </div> <!-- fin row -->
+
+	                      <div class="row" id="roomPriceBill">
+	                      	<div class="col-md-12">
+	                      		<span style="float: left;">Price per Night</span>
+	                      		<span style="float: right;">{{roomSelected.rate}} $ x {{nights}} Nights</span>
+	                      		
+	                      		<br>
+	                      		<span ng-show="discount != null && discount != 0">
+	                      			<span style="float: left;">Discount</span>
+	                      			<span style="float: right;">{{discount}} $</span>
+	                      		</span>
+	                      	</div> <!-- fin col-md-12 -->
+	                      </div> <!-- fin row -->
+	                      
+	                      <div class="row centered" id="totalBill">
+	                      	<div class="col-md-12">
+	                      		<span id="totalLbl">Total</span>
+	                      		<br>
+	                      		<b><span id="totalBillnum">{{totalPay}} $</span></b>
+	                      	</div> <!-- fin col-md-12 -->
+	                      </div> <!-- fin row totalBill-->
+	                    
+	                    <div class="row">
+	                    	<div class="col-md-12">
+	                    		Payment Method
+	                    		<div class="row">
+	                    			<div class="col-md-4 radioForm" ng-repeat="p in payments">
+															<label class="radio-inline">
+                              	<input 	class="radioForm" 
+                              					type="radio" 
+                              					name="payment"
+                              					value="{{p.id}}"
+                              					ng-click="setPayment(p.id);"
+                              					ng-model="payment">
+                    					</label>
+                        		<span class="radioFormLabel">	{{p.name}}</span>
+	                    			</div> <!-- fin col-md-4 radioForm-->
+	                    		</div> <!-- fin row -->
+	                    	</div> <!-- fin col-md-12 -->
+	                    </div> <!-- fin row -->
+	                    
+	                     <div class="row">
+	                      	<div class="col-md-12">
+	                      	<br>
+	              						<button type="button" ng-click="sendReservation()" class="btn btn-primary full" ng-disabled="payment == null">Make Reservation</button>
+	                      	</div>
 	                      </div> 
+
 	                    </span>                  
 	                  </form>
 	                </div>
@@ -506,7 +628,7 @@
             <!--*************************-->
 	            <div class="modal-header">
 	              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	              <h4 class="modal-title" id="ModalRoomsLabel">Room's Views</h4>
+	              <h4 class="modal-title" id="ModalRoomsLabel">Room {{roomShowed.name}}</h4>
 	            </div>
           	
           	<!--*************************-->
@@ -514,9 +636,34 @@
             <!--       MODAL BODY        -->
             <!--                         -->
             <!--*************************-->
-	            <div class="modal-body centered">
-	              
-	              >>{{roomSelected.name}}<<
+	            <div class="modal-body">
+	              <div class="row">
+	              	<div class="col-md-6" class="modalBody">
+	              		<label>Price:</label> 
+	              			{{roomShowed.rate}} $
+	              		<br>
+
+	              		<label>Capacity:</label> 
+	              			{{roomShowed.capacity}} Person
+	              		<br>
+	              		
+
+	              		<label>Room View:</label> 
+	              			{{roomShowed.view.name}}
+	              		<br>
+
+	              		<label>Available:</label> 
+	              			<span ng-show="roomShowed.bank != 0">Yes</span>
+	              			<span ng-show="roomShowed.bank == 0">No</span>
+	              		<br>
+	              		
+
+	              	</div>
+	              	<div class="col-md-6">{{roomShowed.img}}</div>
+	              </div>
+	            
+	            	<span ng-show="roomShowed.capacity < (countCompanions() + 1)" class="alertText"><b>You have {{countCompanions()}} companions and this room have capacity to max ( {{roomShowed.capacity}} ) persons</b></span>
+
 	            </div>
 
           	<!--*************************-->
@@ -526,7 +673,7 @@
             <!--*************************-->
 	            <div class="modal-footer">
 	              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	              <button type="button" class="btn btn-primary" ng-click="selectRoom();" data-dismiss="modal">Pick this view</button>
+	              <button type="button" class="btn btn-primary" ng-click="selectRoom();" data-dismiss="modal" ng-disabled="roomShowed.capacity < (countCompanions() + 1)">Pick this Room</button>
 	            </div>
           
           </div> <!-- fin .modal-content -->

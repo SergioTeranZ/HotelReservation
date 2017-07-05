@@ -3,58 +3,68 @@
 
 		$scope.hotelId = '39a6b5cf-d561-42cc-b87d-d4b189842865';
 
-	/*CALENDAR VAR*/
-		$scope.ymd = ""; $scope.myCalendar;
+		/*CALENDAR VAR*/
+			$scope.ymd = ""; $scope.myCalendar;
 
-	/*MODAL VAR*/
-		$scope.roomId = "";
+		/*MODAL VAR*/
+			$scope.roomId = "";
 
-	/*HTML VAR*/
-		$scope.labelsForm = ['Personal Data','Reservation Data','Companion','Rooms','Reservation'];
-    $scope.labelForm = $scope.labelsForm[0];
-		$scope.genders = ['M','F','Other'];
+		/*HTML VAR*/
+			$scope.labelsForm = ['Personal Data','Reservation Data','Companion','Rooms','Reservation'];
+	    $scope.labelForm = $scope.labelsForm[0];
+			$scope.genders = ['M','F','Other'];
 
-  /*FORM VAR*/
-    /*view 1*/
-	    $scope.emailU = null; 
-	    $scope.nameU = null;
-	    $scope.lastnameU = null;
-	    $scope.code = null;
-	
-		/*view 2*/
-			$scope.dniU = null;  
-			$scope.phoneU = null;  
-			$scope.dateBirthU = null;
-			$scope.genderU = null;
+	  /*FORM VAR*/
+	    /*view 1*/
+		    $scope.emailU = null; 
+		    $scope.nameU = null;
+		    $scope.lastnameU = null;
+		    $scope.code = null;
+		
+			/*view 2*/
+				$scope.dniU = null;  
+				$scope.phoneU = null;  
+				$scope.dateBirthU = null;
+				$scope.genderU = null;
 
-		/*view 3*/
-			$scope.nationalityU = null;
+			/*view 3*/
+				$scope.nationalityU = null;
 
-		/*view 4*/
-			$scope.countryU = null;
-			$scope.stateU = null;
-			$scope.cityU = null;
+			/*view 4*/
+				$scope.countryU = null;
+				$scope.stateU = null;
+				$scope.cityU = null;
 
-		/*view 5*/
-			$scope.dateIn = null;
-			$scope.dateOut = null;
+			/*view 5*/
+				$scope.dateIn = null;
+				$scope.dateOut = null;
 
-		/*view 6*/
-	    $scope.emailC = null; 
-	    $scope.nameC = null;
-	    $scope.lastnameC = null;			
-			$scope.dniC = null;  
-			$scope.phoneC = null;  
-			$scope.dateBirthC = null;
-			$scope.genderC = null;
-			$scope.ageC = null;
-			$scope.companions = [];
-			$scope.maxCompanion = 4;
-			$scope.cantCompanion = 0;
+			/*view 6*/
+		    $scope.emailC = null; 
+		    $scope.nameC = null;
+		    $scope.lastnameC = null;			
+				$scope.dniC = null;  
+				$scope.phoneC = null;  
+				$scope.dateBirthC = null;
+				$scope.genderC = null;
+				$scope.ageC = null;
+				$scope.companions = [];
+				$scope.maxCompanion = 4;
+				$scope.cantCompanion = 0;
 
-		/*view 7*/
-			$scope.rooms = [];
-			$scope.roomSelected = null;
+			/*view 7*/
+				$scope.rooms = [];
+				$scope.roomShowed = null;
+				$scope.roomSelected = null;
+
+			/*view 8*/
+				$scope.nights = null;
+				$scope.payments = [];
+				$scope.payment = null;
+				$scope.discount = null;
+				$scope.totalPay = null;
+				$scope.bill = null;
+				$scope.objPersonU = null;
 
     $scope.init = function() {
 		//******************************************************//
@@ -100,6 +110,10 @@
 			        if($scope.count >= 1  ){$(".arrowForm.right").removeClass("unable");}
 
 			        setLabelForm();
+			        
+			        if($scope.count == 8){
+			        	setBill();
+			        }
 			    }
 			}
 
@@ -220,7 +234,7 @@
 		    /***************************/
 				var setDateOut = calendarOut.attachEvent("onClick",function(){
 					$scope.dateOut = calendarOut.getDate(true);
-					calendarIn.setSensitiveRange(null,$scope.dateOut);
+					calendarIn.setSensitiveRange($scope.ymd,$scope.dateOut);
 				})				
 
 		//******************************************************//
@@ -228,15 +242,44 @@
 		//                   ROOMS FUNCTIONS (init)             //
 		//                                                      //
 		//******************************************************//
-		/*$scope.listRooms = function(){*/
-				RegistrationService.listRooms($scope.hotelId).then(function(result) {   
-                var res = result.entity;
-                for( i in res ){
-                	//console.log(res[i].name);
-                	$scope.rooms.push(res[i]);
-                }// fin for
-            }) // fin then
-		/*}*/
+			RegistrationService.listRooms($scope.hotelId).then(function(result) {   
+	      var res = result.entity;
+	      
+	      for( i in res ){
+	      	$scope.rooms.push(res[i]);
+	      }// fin for
+	    
+	    }) // fin then
+
+	    /***************************/
+	    /*                         */
+	    /* showRoom():             */
+	    /* muestra habitacion      */
+	    /* escogida                */
+	    /*                         */
+	    /***************************/
+	    $scope.showRoom = function(id){
+ 				for(i in $scope.rooms){
+	      	if($scope.rooms[i].id == id){
+	      		$scope.roomShowed = $scope.rooms[i];
+	      	}//fin if
+	      } //fin for
+	    }
+
+		//******************************************************//
+		//                                                      //
+		//                    BILL FUNCTIONS (init)             //
+		//                                                      //
+		//******************************************************//
+			RegistrationService.getPayments($scope.hotelId).then(function(result) {   
+	      var res = result.entity;
+	      
+	      for( i in res ){
+	      	$scope.payments.push(res[i]);
+	      }// fin for
+	    
+	    }) // fin then
+
     }; /* fin init()*/
 
 	//******************************************************//
@@ -245,15 +288,8 @@
 	//                                                      //
 	//******************************************************//
 		$('#ModalRooms').on('show.bs.modal', function(e){
-		    $scope.roomId = $(e.relatedTarget).data('room');
-	      
-	      for(i in $scope.rooms){
-	      	if($scope.rooms[i].id == $(e.relatedTarget).data('room')){
-	      		$scope.roomSelected = $scope.rooms[i];
-	      		//console.log($scope.roomSelected);
-	      	}//fin if
-	      } //fin for
-		
+	    $scope.roomId = $(e.relatedTarget).data('room');
+      $scope.showRoom($scope.roomId);
 		});
 
 	    /***************************/
@@ -265,14 +301,33 @@
 	    $scope.selectRoom = function() {
 	        for(i in $scope.rooms){
 	        	var r = $scope.rooms[i];
+	        	
 	        	$("#room"+r.id).removeClass("active");
-	        	if(r.id == $scope.roomId){
+	        	
+	        	if(r.id == $scope.roomId && (r.capacity >= $scope.countCompanions() + 1)){
 	        		$scope.roomSelected = r;
-	        	}
+	        		$("#room"+$scope.roomId).addClass("active");
+	        	} //fin if
 	        } // fin for
-	        
-	        $("#room"+$scope.roomId).addClass("active");
 	    }; /*fin selectRoom()*/ 
+
+
+	    /***************************/
+	    /*                         */
+	    /* countCompanions():      */
+	    /* Cuenta cantidad de      */ 
+	    /* acompanantes            */
+	    /*                         */
+	    /***************************/
+	    $scope.countCompanions = function(){
+	    	var c = 0;
+	    	for (i in $scope.companions){
+	    		if($scope.companions[i].type == 0 ){
+	    			c +=1;
+	    		}
+	    	}
+	    	return c;
+	    }
 
 	//******************************************************//
 	//                                                      //
@@ -458,6 +513,11 @@
 				$scope.phoneC = null;
 				$scope.dateBirthC = null;
 				$scope.genderC = null;   	
+	    
+				if(($scope.roomSelected != null) && 
+					 ($scope.countCompanions()+1 > $scope.roomSelected.capacity)){
+					$scope.roomSelected = null;
+					$scope.selectRoom() }
 	    }
 
 	    /***************************/
@@ -500,5 +560,124 @@
 	    		}
 	    }
 
+						/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+						/*                                              */
+						/* RECORDATORIO                                 */
+						/* asi tienen que lucir las fechas              */
+						/*                                              */
+						/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+							//"in_date": "2017-03-21T21:36:24.635Z",
+							//"out_date": "2017-03-27T21:36:24.635Z",
+							//"dob": "30/11/1991",
+
+	    /***************************/
+	    /*                         */
+	    /* calculateTotalPayment():*/
+	    /* Calcula total a pagar   */
+	    /* por la reserva, en      */
+	    /* funcion de las noches   */
+	    /* reservadas              */
+	    /*                         */
+	    /***************************/	
+			function calculateTotalPayment(){
+				$scope.nights = countNights();
+				return ($scope.nights*$scope.roomSelected.rate);
+			}
+
+	    /***************************/
+	    /*                         */
+	    /* countNights(): 				 */
+	    /* Cuenta la cantidad de   */
+	    /* noches reservadas       */
+	    /*                         */
+	    /***************************/	
+			function countNights(){
+				
+				var ymdIn = $scope.dateIn.split("-");
+				var dIn =  new Date(ymdIn[0], ymdIn[1]-1, ymdIn[2]);
+
+				var ymdOut = $scope.dateOut.split("-");
+				var dOut = new Date(ymdOut[0], ymdOut[1]-1, ymdOut[2]);
+
+				var res = Math.round((dOut-dIn)/(1000*60*60*24));
+
+				return res;
+			}
+
+	    /***************************/
+	    /*                         */
+	    /* setPayment():  				 */
+	    /* Setea el tipo de pago   */
+	    /*                         */
+	    /***************************/	
+	    $scope.setPayment = function(p){ 
+	    	$scope.payment = p;
+	    	$scope.bill.offer._payment = $scope.payment; 
+	    }
+
+	    /***************************/
+	    /*                         */
+	    /* setBill(): 						 */
+	    /* Crea factura						 */
+	    /* (sin metodo de pago)    */
+	    /*                         */
+	    /***************************/	
+	    function setBill(){
+	    	
+	    	$scope.totalPay = parseInt(calculateTotalPayment());
+
+	    	var objOffer =  {
+						"_payment": $scope.payment,
+						"in_date": $scope.dateIn,
+						"out_date": $scope.dateOut,
+						"discount": $scope.discount,
+						"total": $scope.totalPay,
+						"status": 0,
+						"code": $scope.code,
+						"locator": ""
+					};
+
+				var objRoom = [{"_room": $scope.roomSelected.id}];
+
+				if ($scope.objPersonU == null){
+					$scope.objPersonU = {
+								"first_name": $scope.nameU,
+								"last_name": $scope.lastnameU,
+								"dni": $scope.dniU,
+								"dob": $scope.dateBirthU,
+								"type": 1,
+								"gender": $scope.genderU,
+								"email": $scope.emailU,
+								"country": $scope.countryU,
+								"state": $scope.stateU,
+								"city": $scope.cityU
+					};
+					$scope.companions.push($scope.objPersonU);
+				}
+
+				var objPersonC = $scope.companions;
+
+				var objPersons = $scope.companions; 
+
+	    	$scope.bill = {
+					"offer": objOffer,
+					"rooms": objRoom,
+					"persons": objPersons,
+					"hotel": $scope.hotelId
+				} // fin var obj
+
+				console.log($scope.bill);
+	    } // fin setBill()
+
+			$scope.sendReservation = function(){
+				//setBill();
+				RegistrationService.create($scope.bill).then(function(result) {   
+				  var res = result;
+				  console.log(res)
+				  if(res =="saved"){
+				  	alert("Reservation created");
+				  }
+				}) // fin then
+			}
 });
 

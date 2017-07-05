@@ -322,6 +322,15 @@ h1, h2, h3 {
         width: 100%;
     }
 
+    .alertText{
+        color: rgb(238,122,106);
+    }
+
+/****************************/
+/*                          */
+/*     LABEL COMPANION      */
+/*                          */
+/****************************/
     .labelCompanion{
         background-color: rgb(197,197,197);
         padding:0.5em;
@@ -338,3 +347,79 @@ h1, h2, h3 {
         background-color: rgb(184,184,184);
         border-color: rgb(184,184,184);
     }
+
+
+/****************************/
+/*                          */
+/*     ROOM INFORMATION     */
+/*                          */
+/****************************/
+    .modalBody{   
+        text-align: left;    
+    }
+
+    span[id^="roomInfo"]{
+        position: absolute;
+        visibility: hidden;
+        transition: opacity 0.5s ease-out , visibility 600ms;
+        opacity: 0;    
+        height: 0;
+        overflow: hidden;
+        z-index: 1;
+        
+        background-color: rgba(85,85,85,0.7);
+        color: white; 
+        text-align: left;
+        
+        padding: 1em;
+        min-width: 10em;
+    }
+
+    span[id^="roomInfo"]>label{
+        color: white;
+    }
+
+    button[id^="room"]:hover > span[id^="roomInfo"]{
+        visibility: visible;
+        opacity: 1;
+        height: auto;
+    } 
+
+#rommImgBill{
+    background-color: rgb(85,85,85);
+    width: 4em;
+    height: 4em;
+}
+
+#roomInfoBill h1{
+    font-size: 1.2em;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+#roomInfoBill h2{
+    font-size: 0.9em;
+    margin-top: -0.5em;
+}
+
+#roomInfoRow,#roomPriceBill,#totalBill{
+    border-bottom-style: solid;
+    border-width: 0.02em;
+    border-color: rgb(184,184,184);
+    padding-bottom: 0.3em;
+}
+
+#roomPriceBill{
+    margin-bottom: -1.9em;
+}
+
+#totalLbl{
+    background-color: rgb(243,243,243);
+    padding: 1em;
+    padding-top: 0;
+}
+
+#totalBillnum{
+ font-size: 1.5em;
+ margin-top: 0.5em;   
+}
