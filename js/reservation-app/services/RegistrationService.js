@@ -7,6 +7,7 @@ app.service("RegistrationService", function ($q, $http) {
     var url_person = base_url+"person/"; 
     var url_room = base_url+"room/"; 
     var url_payment = base_url+"payment/"; 
+    var url_season = base_url+"season/"; 
 
     /***************************/
     /*                         */
@@ -90,6 +91,27 @@ app.service("RegistrationService", function ($q, $http) {
             return defered.promise;
     };    
 
+
+    /***************************/
+    /*                         */
+    /* listSeasons():            */
+    /* trae gente en el        */
+    /* sistema                 */
+    /*                         */
+    /***************************/
+    this.listSeasons = function listSeasons (obj){
+        var defered = $q.defer(); 
+        $http({
+            method: 'POST',
+            url: url_season + "list",
+            data: obj,
+        }).then(function(response) {
+            defered.resolve(response.data); 
+        }, function(errorMsg){
+            defered.reject(errorMsg);
+        });
+            return defered.promise;
+    };
 
 });
 

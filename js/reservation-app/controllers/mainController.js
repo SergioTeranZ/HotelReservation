@@ -4,7 +4,8 @@
 		$scope.hotelId = '39a6b5cf-d561-42cc-b87d-d4b189842865';
 
 		/*CALENDAR VAR*/
-			$scope.ymd = ""; $scope.myCalendar;
+			$scope.dmy = ""; 
+			$scope.myCalendar;
 
 		/*MODAL VAR*/
 			$scope.roomId = "";
@@ -50,7 +51,7 @@
 				$scope.ageC = null;
 				$scope.companions = [];
 				$scope.maxCompanion = 4;
-				$scope.cantCompanion = 0;
+				$scope.editbtn = false;
 
 			/*view 7*/
 				$scope.rooms = [];
@@ -73,7 +74,7 @@
 		//                                                      //
 		//******************************************************//
 			// Cantidad slides del form
-			var cant = 9;
+			var cant = 8;
 			//$scope.labelForm = $scope.labelsForm[0];
 
 			// Ocultando todos los slide que no son el primer form
@@ -111,7 +112,7 @@
 
 			        setLabelForm();
 			        
-			        if($scope.count == 8){
+			        if($scope.count == (cant-1) ){
 			        	setBill();
 			        }
 			    }
@@ -155,11 +156,11 @@
 			/*                         */
 			/***************************/
 			function setLabelForm(){
-				if($scope.count <= 4){ $scope.labelForm = $scope.labelsForm[0]; }
-				else if($scope.count == 5){ $scope.labelForm = $scope.labelsForm[1]; }
-				else if($scope.count == 6){ $scope.labelForm = $scope.labelsForm[2]; }
-				else if($scope.count == 7){ $scope.labelForm = $scope.labelsForm[3]; }
-				else if($scope.count == 8){ $scope.labelForm = $scope.labelsForm[4]; }
+				if($scope.count <= 3){ $scope.labelForm = $scope.labelsForm[0]; }
+				else if($scope.count == 4){ $scope.labelForm = $scope.labelsForm[1]; }
+				else if($scope.count == 5){ $scope.labelForm = $scope.labelsForm[2]; }
+				else if($scope.count == 6){ $scope.labelForm = $scope.labelsForm[3]; }
+				else if($scope.count == 7){ $scope.labelForm = $scope.labelsForm[4]; }
 			}
 
 		//******************************************************//
@@ -175,20 +176,28 @@
         var d = currDate.getDate();
         if (d < 10){d = "0"+d}
 	        
-	      $scope.ymd = currDate.getFullYear() +"-"+m+"-"+d;
+	      $scope.dmy = d+"/"+m+"/"+currDate.getFullYear();
 
 				calendarIn =  new dhtmlXCalendarObject(["cal_DateIn"]);
 				calendarOut = new dhtmlXCalendarObject(["cal_DateOut"]);
 				calendarDoBU= new dhtmlXCalendarObject(["cal_DateBirthU"]);
 				calendarDoBC= new dhtmlXCalendarObject(["cal_DateBirthC"]);
 
-				calendarIn.setSensitiveRange($scope.ymd,null);
-				calendarOut.setSensitiveRange($scope.ymd,null);
 
 				calendarIn.hideTime();
 				calendarOut.hideTime();
 				calendarDoBU.hideTime();
 				calendarDoBC.hideTime();
+
+				calendarIn.setDateFormat("%d/%m/%Y");
+				calendarOut.setDateFormat("%d/%m/%Y");
+				calendarDoBU.setDateFormat("%d/%m/%Y");
+				calendarDoBC.setDateFormat("%d/%m/%Y");
+
+				console.log(">>"+$scope.dmy+"\n>>"+calendarDoBU.getDate(true));
+
+				calendarIn.setSensitiveRange($scope.dmy,null);
+				calendarOut.setSensitiveRange($scope.dmy,null);
 
 		    /***************************/
 		    /*                         */
@@ -234,7 +243,7 @@
 		    /***************************/
 				var setDateOut = calendarOut.attachEvent("onClick",function(){
 					$scope.dateOut = calendarOut.getDate(true);
-					calendarIn.setSensitiveRange($scope.ymd,$scope.dateOut);
+					calendarIn.setSensitiveRange($scope.dmy,$scope.dateOut);
 				})				
 
 		//******************************************************//
@@ -354,20 +363,12 @@
 								    $scope.lastnameU = res[i].last_name;
 								    $scope.dniU = res[i].dni;
 								    $scope.genderU = res[i].gender;
-
-								    var d = res[i].dob.split("/")[0];
-				        		if (d < 10 && d[0] != 0){d = "0"+d}
-
-				        		var m = res[i].dob.split("/")[1];
-				        		if (m < 10 && m[0] != 0){m = "0"+m}
-
-								    $scope.dateBirthU = res[i].dob.split("/")[2]+'-'+m+'-'+ d;
-
-										calendarDoBU.setDate(new Date($scope.dateBirthU));
-
+								    $scope.dateBirthU = res[i].dob;
 										$scope.countryU = res[i].country;
 										$scope.stateU = res[i].stateU;
 										$scope.cityU = res[i].city;
+
+										calendarDoBU.setDate(new Date($scope.dateBirthU));
                 	} // fin if
                 } // fin for   
             }) // fin then
@@ -393,20 +394,12 @@
 								    $scope.lastnameC = res[i].last_name;
 								    $scope.dniC = res[i].dni;
 								    $scope.genderC = res[i].gender;
-
-								    var d = res[i].dob.split("/")[0];
-				        		if (d < 10 && d[0] != 0){d = "0"+d}
-
-				        		var m = res[i].dob.split("/")[1];
-				        		if (m < 10 && m[0] != 0){m = "0"+m}
-
-								    $scope.dateBirthC = res[i].dob.split("/")[2]+'-'+m+'-'+ d;
-
-										calendarDoBC.setDate(new Date($scope.dateBirthC));
-
+								    $scope.dateBirthC = res[i].dob;
 										$scope.countryC = res[i].country;
 										$scope.stateC = res[i].state;
 										$scope.cityC = res[i].city;
+
+										calendarDoBC.setDate(new Date($scope.dateBirthC));
                 	}
                 }
                 
@@ -430,14 +423,14 @@
 	    /* companion               */
 	    /*                         */
 	    /***************************/	    
-	    $scope.setGenderC = function(g){$scope.genderC = g;console.log($scope.genderC)}
+	    $scope.setGenderC = function(g){$scope.genderC = g;}
 
 	    /***************************/
 	    /*                         */
 	    /* checkCompanion():       */
 	    /* Regresa true si ya      */
-	    /* existe el correo de 
-	    /* acompanate               */
+	    /* existe el correo de     */
+	    /* acompanate              */
 	    /*                         */
 	    /***************************/	
 	    function checkCompanion(email){
@@ -451,6 +444,25 @@
 
 	    /***************************/
 	    /*                         */
+	    /* importantFieldsC():     */
+	    /* Regresa true si ningun  */ 
+	    /* campo importante esta   */
+	    /* vacio                   */
+	    /*                         */
+	    /***************************/	
+	    function importantFieldsC(){
+	    	return (
+	    		($scope.nameC != null     && $scope.nameC != "")     &&
+	    	 	($scope.lastnameC != null && $scope.lastnameC != "") &&
+    	 		($scope.dniC != null      && $scope.dniC != "")      && 
+    	 		($scope.dateBirthC != null && $scope.dateBirthC != "") &&
+    	 		($scope.genderC != null   && $scope.genderC != "")   &&
+    	 		($scope.emailC != null    && $scope.emailC != "")	
+    	 		)
+	    }
+
+	    /***************************/
+	    /*                         */
 	    /* addCompanion():         */
 	    /* Agrega acompanante a    */ 
 	    /* arreglo                 */
@@ -458,15 +470,9 @@
 	    /***************************/
 	    $scope.addCompanion = function(){
 
-				var dateSet = calendarDoBC.getDate(true);
-				
-				var d = parseInt(dateSet.split("-")[2]);
-				if(d < 10){d = "0"+d}
+				console.log(">"+calendarDoBC.getDate(true)+"\n>"+$scope.dateBirthC);
 
-		    var dobC = d+'/'+dateSet.split("-")[1]+'/'+dateSet.split("-")[0];
-
-				console.log("1."+$scope.dateBirthC);
-				console.log("2."+dobC);
+		    var dobC = $scope.dateBirthC;
 
 	    	var obj = {	first_name: $scope.nameC,
 										last_name: $scope.lastnameC,
@@ -480,32 +486,25 @@
 										city: $scope.cityC
 									};
 
-	    	if(	$scope.nameC != null     && $scope.nameC != ""     &&
-	    	 		$scope.lastnameC != null && $scope.lastnameC != "" &&
-	    	 		$scope.dniC != null      && $scope.dniC != ""      && 
-	    	 		$scope.dateBirthC != null && $scope.dateBirthC != "" &&
-	    	 		$scope.genderC != null   && $scope.genderC != ""   &&
-	    	 		$scope.emailC != null    && $scope.emailC != "" &&
-	    	 		!checkCompanion($scope.emailC)){	
+
+	    	if(	importantFieldsC() && !checkCompanion($scope.emailC) && ($scope.countCompanions() < $scope.maxCompanion)){	
 
 					$scope.companions.push(obj);
-					$scope.cantCompanion+=1;
+					//$scope.cantCompanion+=1;
 
-	    	}else if(	$scope.nameC != null     && $scope.nameC != ""     &&
-				    	 		$scope.lastnameC != null && $scope.lastnameC != "" &&
-				    	 		$scope.dniC != null      && $scope.dniC != ""      && 
-				    	 		$scope.dateBirthC != null && $scope.dateBirthC != "" &&
-				    	 		$scope.genderC != null   && $scope.genderC != ""   &&
-				    	 		$scope.emailC != null    && $scope.emailC != "" &&
-				    	 		checkCompanion($scope.emailC)){
+	    	}
+
+	    	if(	importantFieldsC() && checkCompanion($scope.emailC)){
 
 		    	for(i in $scope.companions){
 		    		if($scope.companions[i].email == $scope.emailC){
 		    			$scope.companions[i] = obj;
 		    		} // fin if
 		    	} // fin for
+
 	    	} // fin else if
 
+				$scope.editbtn = false;
 				$scope.emailC = null;
 				$scope.nameC = null;
 				$scope.lastnameC = null;
@@ -514,10 +513,10 @@
 				$scope.dateBirthC = null;
 				$scope.genderC = null;   	
 	    
-				if(($scope.roomSelected != null) && 
-					 ($scope.countCompanions()+1 > $scope.roomSelected.capacity)){
+				if(($scope.roomSelected != null) && ($scope.countCompanions()+1 > $scope.roomSelected.capacity)){
 					$scope.roomSelected = null;
-					$scope.selectRoom() }
+					$scope.selectRoom() 
+				}
 	    }
 
 	    /***************************/
@@ -531,7 +530,6 @@
 
 	    		for(i in $scope.companions){
 	    			if( $scope.companions[i].email == email ){
-
 			    		$scope.emailC = $scope.companions[i].email;
 							$scope.nameC = $scope.companions[i].first_name;
 							$scope.lastnameC = $scope.companions[i].last_name;
@@ -539,7 +537,7 @@
 							$scope.phoneC = $scope.companions[i].phone;
 							$scope.dateBirthC = $scope.companions[i].dob;
 							$scope.genderC = $scope.companions[i].gender;
-
+							$scope.editbtn = true;
 	    			}
 	    		}
 	    }   
@@ -560,15 +558,6 @@
 	    		}
 	    }
 
-						/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-						/*                                              */
-						/* RECORDATORIO                                 */
-						/* asi tienen que lucir las fechas              */
-						/*                                              */
-						/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-							//"in_date": "2017-03-21T21:36:24.635Z",
-							//"out_date": "2017-03-27T21:36:24.635Z",
-							//"dob": "30/11/1991",
 
 	    /***************************/
 	    /*                         */
@@ -593,14 +582,14 @@
 	    /***************************/	
 			function countNights(){
 				
-				var ymdIn = $scope.dateIn.split("-");
-				var dIn =  new Date(ymdIn[0], ymdIn[1]-1, ymdIn[2]);
+				var dmyIn = $scope.dateIn.split("/");
+				var dIn =  new Date(dmyIn[2], dmyIn[1]-1, dmyIn[0]);
 
-				var ymdOut = $scope.dateOut.split("-");
-				var dOut = new Date(ymdOut[0], ymdOut[1]-1, ymdOut[2]);
+				var dmyOut = $scope.dateOut.split("/");
+				var dOut = new Date(dmyOut[2], dmyOut[1]-1, dmyOut[0]);
 
 				var res = Math.round((dOut-dIn)/(1000*60*60*24));
-
+				console.log(res);
 				return res;
 			}
 
@@ -617,6 +606,21 @@
 
 	    /***************************/
 	    /*                         */
+	    /* transformDate():     	 */
+	    /* Da el formato necesario */ 
+	    /* para crear la           */
+	    /* reservacion             */
+	    /*                         */
+	    /***************************/
+	    function transformDate(date){
+	    	var d = date.split("/")[0];
+	    	var m = date.split("/")[1];
+	    	var y = date.split("/")[2];
+	    	return y+"-"+m+"-"+d+"T21:36:24.635Z";
+	    }
+
+	    /***************************/
+	    /*                         */
 	    /* setBill(): 						 */
 	    /* Crea factura						 */
 	    /* (sin metodo de pago)    */
@@ -628,8 +632,8 @@
 
 	    	var objOffer =  {
 						"_payment": $scope.payment,
-						"in_date": $scope.dateIn,
-						"out_date": $scope.dateOut,
+						"in_date": transformDate($scope.dateIn),
+						"out_date": transformDate($scope.dateOut),
 						"discount": $scope.discount,
 						"total": $scope.totalPay,
 						"status": 0,
@@ -640,6 +644,7 @@
 				var objRoom = [{"_room": $scope.roomSelected.id}];
 
 				if ($scope.objPersonU == null){
+					
 					$scope.objPersonU = {
 								"first_name": $scope.nameU,
 								"last_name": $scope.lastnameU,
@@ -652,10 +657,9 @@
 								"state": $scope.stateU,
 								"city": $scope.cityU
 					};
+
 					$scope.companions.push($scope.objPersonU);
 				}
-
-				var objPersonC = $scope.companions;
 
 				var objPersons = $scope.companions; 
 
@@ -664,17 +668,22 @@
 					"rooms": objRoom,
 					"persons": objPersons,
 					"hotel": $scope.hotelId
-				} // fin var obj
-
-				console.log($scope.bill);
+				} // fin $scope.bill
 	    } // fin setBill()
 
+	    /***************************/
+	    /*                         */
+	    /* sendReservation():      */
+	    /* Envia factura  				 */
+	    /*                         */
+	    /***************************/
 			$scope.sendReservation = function(){
 				//setBill();
+				console.log($scope.bill);
 				RegistrationService.create($scope.bill).then(function(result) {   
 				  var res = result;
 				  console.log(res)
-				  if(res =="saved"){
+				  if(res.message =="saved"){
 				  	alert("Reservation created");
 				  }
 				}) // fin then
