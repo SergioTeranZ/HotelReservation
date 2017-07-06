@@ -74,7 +74,7 @@
 		//                                                      //
 		//******************************************************//
 			// Cantidad slides del form
-			var cant = 8;
+			var cant = 7;
 			//$scope.labelForm = $scope.labelsForm[0];
 
 			// Ocultando todos los slide que no son el primer form
@@ -156,11 +156,11 @@
 			/*                         */
 			/***************************/
 			function setLabelForm(){
-				if($scope.count <= 3){ $scope.labelForm = $scope.labelsForm[0]; }
-				else if($scope.count == 4){ $scope.labelForm = $scope.labelsForm[1]; }
-				else if($scope.count == 5){ $scope.labelForm = $scope.labelsForm[2]; }
-				else if($scope.count == 6){ $scope.labelForm = $scope.labelsForm[3]; }
-				else if($scope.count == 7){ $scope.labelForm = $scope.labelsForm[4]; }
+				if($scope.count <= 2){ $scope.labelForm = $scope.labelsForm[0]; }
+				else if($scope.count == 3){ $scope.labelForm = $scope.labelsForm[1]; }
+				else if($scope.count == 4){ $scope.labelForm = $scope.labelsForm[2]; }
+				else if($scope.count == 5){ $scope.labelForm = $scope.labelsForm[3]; }
+				else if($scope.count == 6){ $scope.labelForm = $scope.labelsForm[4]; }
 			}
 
 		//******************************************************//
@@ -470,10 +470,7 @@
 	    /***************************/
 	    $scope.addCompanion = function(){
 
-				console.log(">"+calendarDoBC.getDate(true)+"\n>"+$scope.dateBirthC);
-
 		    var dobC = $scope.dateBirthC;
-
 	    	var obj = {	first_name: $scope.nameC,
 										last_name: $scope.lastnameC,
 										dni: $scope.dniC,
@@ -488,10 +485,7 @@
 
 
 	    	if(	importantFieldsC() && !checkCompanion($scope.emailC) && ($scope.countCompanions() < $scope.maxCompanion)){	
-
 					$scope.companions.push(obj);
-					//$scope.cantCompanion+=1;
-
 	    	}
 
 	    	if(	importantFieldsC() && checkCompanion($scope.emailC)){
@@ -589,7 +583,6 @@
 				var dOut = new Date(dmyOut[2], dmyOut[1]-1, dmyOut[0]);
 
 				var res = Math.round((dOut-dIn)/(1000*60*60*24));
-				console.log(res);
 				return res;
 			}
 

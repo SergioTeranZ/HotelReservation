@@ -141,10 +141,10 @@
                     <i 	id="iconForm" 
                     		class="iconForm" 
                     		aria-hidden="true" 
-                    		ng-class="{	'fa fa-address-card-o':(count <= 3 || count == 5),
-                    								'fa fa-calendar':(count == 4),
-                    								'fa fa-bed':(count == 6),
-                    								'fa fa-money':(count == 7)}"></i>
+                    		ng-class="{	'fa fa-address-card-o':(count <= 2 || count == 4),
+                    								'fa fa-calendar':(count == 3),
+                    								'fa fa-bed':(count == 5),
+                    								'fa fa-money':(count == 6)}"></i>
 	                
 	                </h1>
 
@@ -153,7 +153,7 @@
 	                <!--    LABELS COMPANIONS    -->
 	                <!--                         -->
 	                <!--*************************-->
-		                <span ng-show="count == 5 && companions !=[]">
+		                <span ng-show="count == 4 && companions !=[]">
 		                	<div class="row">
 		                	<div class="col-md-6">
 		                		
@@ -192,31 +192,25 @@
 	                      			(nameU == null || nameU == '') || 
 	                      			(lastnameU == null || lastnameU == '')
 	                      			(dniU == null || dniU == '') || 
-	                      			(phoneU == null || phoneU == '') || 
 	                      			(dateBirthU == null || dateBirthU == '') || 
 	                      			(genderU == null || genderU == '') )
 	                      		) || 
 	                      		
 	                      		(count == 2 && (
-	                      			(nationalityU == null || nationalityU == '') )
-	                      		) ||
-
-	                      		(count == 3 && (
-	                      			(countryU == null || countryU == '') || 
-	                      			(stateU == null || stateU == '') || 
+	                      			(countryU == null || countryU == '') ||  
 	                      			(cityU == null || cityU == '') )
 	                      		) || 
 
-	                      		(count == 4 && (
+	                      		(count == 3 && (
 	                      			(dateIn == null || dateIn == '') ||
 	                      			(dateOut == null || dateOut == '') )
 	                      		) ||
 
-	                      		(count == 6 && (
+	                      		(count == 5 && (
 	                      			(roomSelected == null || roomSelected == '') )
 	                      		) ||
 
-	                      		(count == 7)}" ></i>
+	                      		(count == 6)}" ></i>
 	                </div>          
 
 	              <!--*************************-->
@@ -237,86 +231,84 @@
 	                  <!--*********************-->
 	                    <span id="viewForm1">
 	                    
-	                    <div class="row">
-	                    	<div class="col-md-12">
-		                      <label>Email</label><br>
-		                      <input 	type="email" 
-		                      				name="emailU" 
-		                      				id="emailU" 
-		                      				placeholder="example@mail.com"
-		                      				ng-change="getPersonU();" 
-		                      				ng-model="emailU"/>	
-	                    	</div>
-	                    </div>
+		                    <div class="row">
+		                    	<div class="col-md-12">
+			                      <label>Email</label><br>
+			                      <input 	type="email" 
+			                      				name="emailU" 
+			                      				id="emailU" 
+			                      				placeholder="example@mail.com"
+			                      				ng-change="getPersonU();" 
+			                      				ng-model="emailU"/>	
+		                    	</div>
+		                    </div> <!-- fin row -->
 
-	                    <div class="row">
-	                    	<div class="col-md-6">
+		                    <div class="row">
+		                    	<div class="col-md-6">
+			                      <label>Name</label><br>
+			                      <input 	type="text" 
+			                      				name="" 
+			                      				id="nameU"  
+			                      				placeholder="Name" 
+			                      				ng-model="nameU" />
 
-		                      <label>Name</label><br>
-		                      <input 	type="text" 
-		                      				name="" 
-		                      				id="nameU"  
-		                      				placeholder="Name" 
-		                      				ng-model="nameU" />
+			                      <label>Lastname</label><br>
+			                      <input 	type="text" 
+			                      				name="" 
+			                      				id="lastnameU"  
+			                      				placeholder="Lastname" 
+			                      				ng-model="lastnameU" />
+														
+														<label>Gender</label><br>
+		                    		<div class="row">
+		                        		<div class="col-md-4 radioForm" ng-repeat="gen in genders" for="{{gen}}">
+		                            	<label class="radio-inline">
+		                              	<input 	class="radioForm" 
+		                              					type="radio" 
+		                              					name="gender"
+		                              					value="{{gen}}"
+		                              					ng-click="setGender(gen);"
+		                              					ng-model="genderU">
+		                    					</label>
+		                        		<span class="radioFormLabel">	{{gen}}</span>
+		                        		</div>
+		                        </div>
+			                      
+		                    	</div> <!-- fin col-md-6 -->
 
-		                      <label>Lastname</label><br>
-		                      <input 	type="text" 
-		                      				name="" 
-		                      				id="lastnameU"  
-		                      				placeholder="Lastname" 
-		                      				ng-model="lastnameU" />
-													
-													<label>Gender</label><br>
-	                    		<div class="row">
-	                        		<div class="col-md-4 radioForm" ng-repeat="gen in genders" for="{{gen}}">
-	                            	<label class="radio-inline">
-	                              	<input 	class="radioForm" 
-	                              					type="radio" 
-	                              					name="gender"
-	                              					value="{{gen}}"
-	                              					ng-click="setGender(gen);"
-	                              					ng-model="genderU">
-	                    					</label>
-	                        		<span class="radioFormLabel">	{{gen}}</span>
-	                        		</div>
-	                        </div>
-		                      
-	                    	</div> <!-- fin col-md-6 -->
+		                    	<div class="col-md-6">
+			                      <label>DNI</label><br>
+			                      <input 	type="text" 
+			                      				name="dniU" 
+			                      				id="dniU"  
+			                      				placeholder="DNI" 
+			                      				ng-model="dniU"/>
 
-	                    	<div class="col-md-6">
-		                      <label>DNI</label><br>
-		                      <input 	type="text" 
-		                      				name="dniU" 
-		                      				id="dniU"  
-		                      				placeholder="DNI" 
-		                      				ng-model="dniU"/>
+			                      <label>Phone</label><br>
+			                      <input 	type="text" 
+			                      				name="phoneU" 
+			                      				id="phoneU"  
+			                      				placeholder="(0000) 000-00-00" 
+			                      				ng-model="phoneU"/>
 
-		                      <label>Phone</label><br>
-		                      <input 	type="text" 
-		                      				name="phoneU" 
-		                      				id="phoneU"  
-		                      				placeholder="(0000) 000-00-00" 
-		                      				ng-model="phoneU"/>
-
-		                      <label>Date of Birth</label><br>
-		                      <input 	type="text" 
-		                      				id="cal_DateBirthU"
-		                      				ng-model="dateBirthU">
-		                              
-	                    	</div> <!-- fin col-md-6 -->
-	                    </div><!-- fin row -->
-	                    
-	                    <div class="row">
-	                    	<div class="col-md-12">
-	                    		<label>Code</label><br>
-		                      <input 	type="text" 
-		                      				name="" 
-		                      				id="code"  
-		                      				placeholder="XXXX" 
-		                      				ng-model="code" /> 
-	                    	</div> <!-- fin col-md-12 -->
-	                    </div><!-- fin row -->
-
+			                      <label>Date of Birth</label><br>
+			                      <input 	type="text" 
+			                      				id="cal_DateBirthU"
+			                      				ng-model="dateBirthU">
+			                              
+		                    	</div> <!-- fin col-md-6 -->
+		                    </div><!-- fin row -->
+		                    
+		                    <div class="row">
+		                    	<div class="col-md-12">
+		                    		<label>Code</label><br>
+			                      <input 	type="text" 
+			                      				name="" 
+			                      				id="code"  
+			                      				placeholder="XXXX" 
+			                      				ng-model="code" /> 
+		                    	</div> <!-- fin col-md-12 -->
+		                    </div><!-- fin row -->
 	                    </span>
                    
 
@@ -326,78 +318,76 @@
 	                  <!-- civil state,        -->
 	                  <!-- nationality,        -->
 	                  <!-- education level     -->
-	                  <!--                     -->
-	                  <!--*********************-->
-	                    <span id="viewForm2">   
-	                      <label>Civil State</label><br>
-	                      <select id="civilState1">
-	                          <option selected="" disabled="" value="0">Select Civil State</option>
-	                          <option value="1">Single</option>
-	                          <option value="2">Married</option>
-	                          <option value="3">Divorced</option>
-	                      </select>
-
-	                      <label>Nationality</label><br>
-	                      <input 	type="text" 
-	                      				name="nationalityU" 
-	                      				id="nationalityU"  
-	                      				placeholder="Nationality" 
-	                      				ng-model="nationalityU"/>
-
-	                      <label>Education Level</label><br>
-	                      <select id="EducationLevel1">
-	                          <option selected="" disabled="" value="0">EducationLevel</option>
-	                          <option value="1">EducationLevel1</option>
-	                          <option value="2">EducationLevel2</option>
-	                          <option value="3">EducationLevel3</option>
-	                      </select>
-	                    </span>
-	        
-	                  <!--*********************-->
-	                  <!--                     -->
-	                  <!-- VISTA 3:            -->
 	                  <!-- country,state,city  -->
 	                  <!--                     -->
 	                  <!--*********************-->
-	                    <span id="viewForm3">   
-	                      <label>Country</label><br>
-	                      <input 	type="text" 
-	                      				name="countryU" 
-	                      				id="countryU"  
-	                      				placeholder="Country" 
-	                      				ng-model="countryU"/>
+	                    <span id="viewForm2">   
+		                    <div class="row">
+		                    	<div class="col-md-6">	                    
+		                      <label>Civil State</label><br>
+		                      <select id="civilState1">
+		                          <option selected="" disabled="" value="0">Select Civil State</option>
+		                          <option value="1">Single</option>
+		                          <option value="2">Married</option>
+		                          <option value="3">Divorced</option>
+		                      </select>
 
-	                      <label>State</label><br>
-	                      <input 	type="text" 
-	                      				name="stateU" 
-	                      				id="stateU"  
-	                      				placeholder="State" 
-	                      				ng-model="stateU"/>
+		                      <label>Nationality</label><br>
+		                      <input 	type="text" 
+		                      				name="nationalityU" 
+		                      				id="nationalityU"  
+		                      				placeholder="Nationality" 
+		                      				ng-model="nationalityU"/>
 
-	                      <label>City</label><br>
-	                      <input 	type="text" 
-	                      				name="cityU" 
-	                      				id="cityU"  
-	                      				placeholder="City" 
-	                      				ng-model="cityU"/>
-	                    </span>            
+		                      <label>Education Level</label><br>
+		                      <select id="EducationLevel1">
+		                          <option selected="" disabled="" value="0">EducationLevel</option>
+		                          <option value="1">EducationLevel1</option>
+		                          <option value="2">EducationLevel2</option>
+		                          <option value="3">EducationLevel3</option>
+		                      </select>
+		                    	</div> <!-- fin col-md-6 -->
+		                    	<div class="col-md-6">
+														<label>Country</label><br>
+			                      <input 	type="text" 
+			                      				name="countryU" 
+			                      				id="countryU"  
+			                      				placeholder="Country" 
+			                      				ng-model="countryU"/>
+
+			                      <label>State</label><br>
+			                      <input 	type="text" 
+			                      				name="stateU" 
+			                      				id="stateU"  
+			                      				placeholder="State" 
+			                      				ng-model="stateU"/>
+
+			                      <label>City</label><br>
+			                      <input 	type="text" 
+			                      				name="cityU" 
+			                      				id="cityU"  
+			                      				placeholder="City" 
+			                      				ng-model="cityU"/>          		
+		                    	</div> <!-- fin col-md-6 -->
+		                    </div> <!-- fin row -->
+	                    </span>           
 	                  
 	                  <!--*********************-->
 	                  <!--                     -->
-	                  <!-- VISTA 4:            -->
+	                  <!-- VISTA 3:            -->
 	                  <!-- date in/out         -->
 	                  <!--                     -->
 	                  <!--*********************-->
-	                    <span id="viewForm4">
+	                    <span id="viewForm3">
 	                      <div class="row">
-	                        <div class="col-md-6">
+	                        <div class="col-md-12">
 	                          <label>In Date</label><br>
 	                          <input 	type="text" 
 	                          				id="cal_DateIn"
 	                          				ng-model="dateIn">
 	                          
 	                        </div>
-	                        <div class="col-md-6">
+	                        <div class="col-md-12">
 	                          <label>Out Date</label><br>
 	                          <input 	type="text" 
 	                          				id="cal_DateOut"
@@ -409,13 +399,13 @@
 
 	                  <!--*********************-->
 	                  <!--                     -->
-	                  <!-- VISTA 5:            -->
+	                  <!-- VISTA 4:            -->
 	                  <!-- nameC,phoneC,emailC -->
 	                  <!-- BirthC,lastnameC    -->
 	                  <!-- dniC,genderC        -->
 	                  <!--                     -->
 	                  <!--*********************-->
-	                    <span id="viewForm5"> 
+	                    <span id="viewForm4"> 
 	                    	<div class="row">
 	                    		<div class="col-md-12">
 
@@ -500,11 +490,11 @@
 
 	                  <!--*********************-->
 	                  <!--                     -->
-	                  <!-- VISTA 6:            -->
+	                  <!-- VISTA 5:            -->
 	                  <!-- Rooms               -->
 	                  <!--                     -->
 	                  <!--*********************-->
-	                    <span id="viewForm6"> 
+	                    <span id="viewForm5"> 
 	                      <div class="row centered">
 	                      <button 
 	                      		type="button" 
@@ -537,11 +527,11 @@
 	                  
 	                  <!--*********************-->
 	                  <!--                     -->
-	                  <!-- VISTA 7:            -->
+	                  <!-- VISTA 6:            -->
 	                  <!-- Final               -->
 	                  <!--                     -->
 	                  <!--*********************-->
-	                    <span id="viewForm7">
+	                    <span id="viewForm6">
 	                      
 	                      <div class="row">
 	                        <div class="col-md-12">
